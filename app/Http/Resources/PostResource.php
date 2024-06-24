@@ -16,7 +16,8 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => UserResource::make($this->user),
+        //    'user' => UserResource::make($this->user), //lazy load 
+            'user' => $this->whenLoaded('user', fn () => UserResource::make($this->user)), //load relation user when we needed
             'title' => $this->title,
             'body' => $this->body,
             'updated_at' => $this->updated_at,
