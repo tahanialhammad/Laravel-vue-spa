@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 
@@ -18,7 +19,7 @@ class PostController extends Controller
             // 'posts' => Post::all(),
             //  'posts' => PostResource::collection(Post::all()),
             //  'posts' => PostResource::collection(Post::paginate()), //ega loaden is faster is by collection(Post::with('user')->paginate()) , it load all needed user in one query, but not all data we need fron user table , so we need to fix PostResource to load data only when we needed in vue 
-            //  'posts' => PostResource::collection(Post::latest()->latest('id')->paginate()), //this wil be ordered by creat_at then id
+            //  'posts' => PostResource::collection(Post::latest()->latest('id')->paginate()), //this wil be ordered by creat_at then id, if tow post created at the same time
             //for user name 
             'posts' => PostResource::collection(Post::with('user')->latest()->latest('id')->paginate()),
 
@@ -50,6 +51,7 @@ class PostController extends Controller
 
         return inertia('Posts/Show', [
             'post' => PostResource::make($post),
+            'comments' => CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10)),
         ]);
     }
 
