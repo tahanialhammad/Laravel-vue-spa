@@ -1,9 +1,17 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+
+Route::get('/test', function () {
+   // return UserResource::make(User::find(1));
+});
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
