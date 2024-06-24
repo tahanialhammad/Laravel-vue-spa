@@ -17,7 +17,7 @@ class PostController extends Controller
         return inertia('Posts/Index', [
            // 'posts' => Post::all(),
         //   'posts' => PostResource::collection(Post::all()),
-        'posts' => PostResource::collection(Post::paginate()),
+        'posts' => PostResource::collection(Post::paginate()), //ega loaden is faster is by collection(Post::with('user')->paginate()) , it load all needed user in one query, but not all data we need fron user table , so we need to fix PostResource to load data only when we needed in vue 
 
         ]);
     }
