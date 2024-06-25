@@ -27,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
         //to make it faster, to prevent that an nessay data loding , by showing een error message Attempted to lazy load [user] on .... , so we can fix resourse by whenLoaded 
         Model::preventLazyLoading();
 
+        //turn off mass assignment o
+        Model::unguard();
+
     }
 }
