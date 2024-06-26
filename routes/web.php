@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 
 Route::get('/test', function () {
-   // return UserResource::make(User::find(1));
+    // return UserResource::make(User::find(1));
 });
 
 
@@ -37,7 +37,10 @@ Route::middleware([
     })->name('dashboard');
 
     // Comments
-Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
-Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    // Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+    // Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    // Route::put('comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    //all in one 
+    Route::resource('posts.comments', CommentController::class)->shallow()->only(['store', 'update', 'destroy']);
 
 });
