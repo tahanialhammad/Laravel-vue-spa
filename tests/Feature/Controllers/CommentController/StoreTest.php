@@ -5,6 +5,14 @@ use App\Models\Post;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\post;
+
+//test uth user
+it('requires authentication', function () {
+    post(route('posts.comments.store', Post::factory()->create()))
+        ->assertRedirect(route('login'));
+});
+
 
 it('can store a comment', function () {
     //we need a user and post to store a comment on it 
