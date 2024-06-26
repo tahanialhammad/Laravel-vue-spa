@@ -26,8 +26,6 @@ Route::get('/', function () {
 // Posts
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-// Comments
-Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
 
 Route::middleware([
     'auth:sanctum',
@@ -37,4 +35,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    // Comments
+Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 });
