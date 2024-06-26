@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
@@ -31,7 +33,7 @@ class CommentController extends Controller
     {
         $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
 
-     //  $comment = Comment::make($data);
+        //  $comment = Comment::make($data);
         Comment::create([
             ...$data,
             'post_id' => $post->id,
@@ -75,9 +77,17 @@ class CommentController extends Controller
         if ($request->user()->id !== $comment->user_id) {
             abort(403);
         }
+        // use policy
+        //    $this->authorize('delete', $comment); // this was in laravel 10
+        //laravel 11 v23 Jeffrey way
+       // Gate::authorize('delete', $comment); //i think is no need to do that , its now in resource
+
 
         $comment->delete();
-// Redirect to post_id and not the whole post form to avoid doing the query again
-        return to_route('posts.show', $comment->post_id);
+        // Redirect to post_id and not the whole post form to avoid doing the query again
+      //  return to_route('posts.show', $comment->post_id);
+        //to return to show and with the same page in pagination , but we need to update delete form by emit
+        return to_route('posts.show', ['post' => $comment->post_id, 'page' => $request->query('page')]);
+
     }
 }

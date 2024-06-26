@@ -9,7 +9,8 @@ use Illuminate\Auth\Access\Response;
 class CommentPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view any models. 
+     * like index page
      */
     public function viewAny(User $user): bool
     {
@@ -18,6 +19,7 @@ class CommentPolicy
 
     /**
      * Determine whether the user can view the model.
+     * like show page
      */
     public function view(User $user, Comment $comment): bool
     {
@@ -45,7 +47,12 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        //
+        //delete a comment if you are the owner of the comment 
+        if ($user->id !== $comment->user_id) {
+            return false;
+        }
+
+        return $comment->created_at->isAfter(now()->subHour());
     }
 
     /**
