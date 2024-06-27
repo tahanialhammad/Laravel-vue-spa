@@ -49,7 +49,6 @@ import {router, useForm} from "@inertiajs/vue3";
 import TextArea from "@/Components/TextArea.vue";
 import InputError from "@/Components/InputError.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {useConfirm} from "@/Utilities/Composables/useConfirm.js";
 
 const props = defineProps(['post', 'comments']);
 
@@ -66,7 +65,7 @@ const commentBeingEdited = computed(() => props.comments.data.find(comment => co
 const editComment = (commentId) => {
     commentIdBeingEdited.value = commentId;
     commentForm.body = commentBeingEdited.value?.body;
-    commentTextAreaRef.value?.focus();
+    commentTextAreaRef.value?.focus(); //to jumb to the form by ref
 };
 
 const cancelEditComment = () => {
@@ -79,24 +78,22 @@ const addComment = () => commentForm.post(route('posts.comments.store', props.po
     onSuccess: () => commentForm.reset(),
 });
 
-const { confirmation } = useConfirm();
+const updateComment = () => commentForm.put(route('comments.update', {
+    comment: commentIdBeingEdited.value,
+    page: props.comments.meta.current_page,
+}), {
+    preserveScroll: true,
+    onSuccess: cancelEditComment, //becouse his wil reset form 
+});
 
-const updateComment = async () => {
-    if (! await confirmation('Are you sure you want to update this comment?')) {
-        commentTextAreaRef.value?.focus();
-        return;
-    }
+// const deleteComment = (commentId) => router.delete(route('comments.destroy', { comment: commentId, page: props.comments.meta.current_page }), {
+//     preserveScroll: true,
+// });
 
-    commentForm.put(route('comments.update', {
-        comment: commentIdBeingEdited.value,
-        page: props.comments.meta.current_page,
-    }), {
-        preserveScroll: true,
-        onSuccess: cancelEditComment,
-    });
-};
-
+// use js confirm 
 const deleteComment = async (commentId) => {
+    // default js :  if (! confirm( .....)
+    //use confirmation model from jetstream , we wil updat it ConfirmationModalWrappe
     if (! await confirmation('Are you sure you want to delete this comment?')) {
         return;
     }
