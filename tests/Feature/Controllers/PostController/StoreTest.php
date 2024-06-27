@@ -28,6 +28,7 @@ it('requires authentication', function () {
 //     ]);
 // });
 
+
 // ERROR
 // it('redirects to the post show page', function () {
 //     $user = User::factory()->create();
