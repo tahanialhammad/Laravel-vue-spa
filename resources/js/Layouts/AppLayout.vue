@@ -39,6 +39,14 @@ const menu = [
         name: "Posts",
         url: route('posts.index'),
         route: 'posts.index',
+    },
+    {
+        name: "Create a Post",
+        url: route('posts.create'),
+        route: 'posts.create',
+        when: () => usePage().props.auth.user,
+        //account weet w week to can creat posts in policy
+     //   when: () => usePage().props.permissions.create_posts,
     }
 ];
 </script>
