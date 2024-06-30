@@ -22,7 +22,9 @@ it('passes a post to the view', function () {
 
     $post->load('user');
 
-    get(route('posts.show', $post))
+   // get(route('posts.show', $post))
+   //with slug
+    get($post->showRoute())
         ->assertHasResource('post', PostResource::make($post));
 });
 
@@ -34,6 +36,8 @@ it('passes comments to the view', function () {
 
     $comments->load('user');
 
-    get(route('posts.show', $post))
+    // get(route('posts.show', $post))
+     //with slug
+     get($post->showRoute())
         ->assertHasPaginatedResource('comments', CommentResource::collection($comments->reverse())); //latest coomments first
 });

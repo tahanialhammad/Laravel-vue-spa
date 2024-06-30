@@ -28,7 +28,8 @@ it('redirects to the post show page', function () {
 
     actingAs($comment->user)
         ->put(route('comments.update', $comment), ['body' => 'This is the new body'])
-        ->assertRedirect(route('posts.show', $comment->post));
+      //  ->assertRedirect(route('posts.show', $comment->post));
+      ->assertRedirect($comment->post->showRoute()); // with slug
 });
 
 it('redirects to the correct page of comments', function () {
@@ -36,7 +37,8 @@ it('redirects to the correct page of comments', function () {
 
     actingAs($comment->user)
         ->put(route('comments.update', ['comment' => $comment, 'page' => 2]), ['body' => 'This is the new body'])
-        ->assertRedirect(route('posts.show', ['post' => $comment->post, 'page' => 2]));
+       // ->assertRedirect(route('posts.show', ['post' => $comment->post, 'page' => 2]));
+       ->assertRedirect($comment->post->showRoute(['page' => 2])); // with slug
 });
 
 it('cannot update a comment from another user', function () {
