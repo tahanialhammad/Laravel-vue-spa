@@ -27,4 +27,11 @@ class Post extends Model
     {
         return Attribute::set(fn ($value) => Str::title($value));
     }
+    //to make slug url ,in array so we can add more pram ex page ....
+    // add it to post resource
+    public function showRoute(array $parameters = [])
+    {
+        // this == id , slug method = title, extra pram ,
+        return route('posts.show', [$this, Str::slug($this->title), ...$parameters]);
+    }
 }

@@ -8,7 +8,9 @@
 
                 <!-- with pagination -->
                 <li v-for="post in posts.data" :key="post.id" class="px-2 py-4">
-                    <Link :href="route('posts.show', post.id)" class="block group px-2 py-4">
+                    <!-- <Link :href="route('posts.show', post.id)" class="block group px-2 py-4"> -->
+                        <!-- use slug url  -->
+                        <Link :href="post.routes.show" class="block group px-2 py-4">
                         <span class="font-bold text-lg group-hover:text-indigo-500">{{ post.title }}</span>
                         <span class="first-letter:uppercase block pt-1 text-sm text-gray-600">{{ formattedDate(post) }} ago by {{ post.user.name }}</span>
                     </Link>
