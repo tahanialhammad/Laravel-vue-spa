@@ -14,7 +14,7 @@
                     <InputLabel for="body" class="sr-only">Body</InputLabel>
                     <MarkdownEditor v-model="form.body" />
 
-                    <TextArea id="body" v-model="form.body" rows="25" />
+                    <TextArea id="body" v-model="form.body" rows="5" />
                     <InputError :message="form.errors.body" class="mt-1" />
                 </div>
 
