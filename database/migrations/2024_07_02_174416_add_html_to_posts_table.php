@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->longText('html')->after('body');
         });
+
+        Schema::table('comments', function (Blueprint $table) {
+            $table->longText('html')->after('body');
+        });
     }
 
     /**

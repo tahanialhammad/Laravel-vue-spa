@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\ConvertsMarkdownToHtml;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,10 +16,12 @@ class Post extends Model
     use HasFactory;
 
     //overwrite booted method , call this when post createted, updated
-    protected static function booted()
-    {
-        static::saving(fn (self $post) => $post->fill(['html' => str($post->body)->markdown()]));
-    }
+    //make it reusable for comment in Concerns
+    // protected static function booted()
+    // {
+    //     static::saving(fn (self $post) => $post->fill(['html' => str($post->body)->markdown()]));
+    // }
+    use ConvertsMarkdownToHtml;
 
     public function user(): BelongsTo
     {
