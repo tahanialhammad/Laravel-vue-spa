@@ -14,6 +14,12 @@ class Post extends Model
 {
     use HasFactory;
 
+    //overwrite booted method , call this when post createted, updated
+    protected static function booted()
+    {
+        static::saving(fn (self $post) => $post->fill(['html' => str($post->body)->markdown()]));
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -27,6 +33,16 @@ class Post extends Model
     {
         return Attribute::set(fn ($value) => Str::title($value));
     }
+
+//body and html, but its not best practice becouse we wil call this with every single edit on the post, so we go to use listener to event on the model
+    // public function body(): Attribute
+    // {
+    //     return Attribute::set(fn ($value) => [
+    //         'body'=> $value,
+    //         'html' => str($value)->markdown()
+    //         ]
+    //     );
+    // }
     //to make slug url ,in array so we can add more pram ex page ....
     // add it to post resource
     public function showRoute(array $parameters = [])

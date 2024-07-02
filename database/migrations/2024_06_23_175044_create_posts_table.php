@@ -12,13 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
-            $table->string('title');
-            $table->longText('body');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('posts')) {
+
+            Schema::create('posts', function (Blueprint $table) {
+                $table->id();
+                $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
+                $table->string('title');
+                $table->longText('body');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
