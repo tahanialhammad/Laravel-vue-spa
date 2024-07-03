@@ -1,9 +1,11 @@
 <template>
     <AppLayout :title="post.title">
         <Container>
-            <!-- <h1 class="text-2xl font-bold">{{ post.title }}</h1> -->
-            <PageHeading>{{ post.title }}</PageHeading>
+            <Pill :href="route('posts.index', {topic: post.topic.slug})">{{ post.topic.name }}</Pill>
 
+            <!-- <h1 class="text-2xl font-bold">{{ post.title }}</h1> -->
+            <PageHeading class="mt-2">{{ post.title }}</PageHeading>
+            
             <span class="block mt-1 text-sm text-gray-600">{{ formattedDate }} ago by {{ post.user.name }}</span>
 
             <!-- <article class="mt-6">
@@ -57,6 +59,8 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {useConfirm} from "@/Utilities/Composables/useConfirm.js";
 import MarkdownEditor from "@/Components/MarkdownEditor.vue";
 import PageHeading from "@/Components/PageHeading.vue";
+import Pill from "@/Components/Pill.vue";
+
 
 const props = defineProps(['post', 'comments']);
 
