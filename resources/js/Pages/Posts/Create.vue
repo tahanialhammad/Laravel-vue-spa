@@ -12,7 +12,20 @@
 
                 <div class="mt-3">
                     <InputLabel for="body" class="sr-only">Body</InputLabel>
-                    <MarkdownEditor v-model="form.body" />
+                    <MarkdownEditor v-model="form.body">
+                        <template #toolbar="{ editor }">
+                            <li>
+                                <button @click="() => editor.chain().focus().toggleHeading({ level: 5 }).run()"
+                                    type="button" class="px-3 py-2"
+                                    :class="[editor.isActive('heading', { level: 5 }) ? 'bg-indigo-500 text-white' : 'hover:bg-gray-200']"
+                                    title="Heading 4">
+                                    <i class="ri-h-4"></i>
+                                </button>
+                            </li>
+                        </template>
+
+                    </MarkdownEditor>
+
 
                     <TextArea id="body" v-model="form.body" rows="5" />
                     <InputError :message="form.errors.body" class="mt-1" />
@@ -27,7 +40,7 @@
 </template>
 
 <script setup>
-import {useForm} from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
