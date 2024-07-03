@@ -1,16 +1,15 @@
 <?php
 
 use App\Models\Post;
-use App\Models\Topic;
 use App\Models\User;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\post;
 
+
+//was ERROR in store and redirects test becouse of validation min charcters in body 
 beforeEach(function () {
-    $this->validData = fn() => [
+    $this->validData = [
         'title' => 'Hello World',
-        'topic_id' => Topic::factory()->create()->getKey(),
         'body' => 'Ullamco Lorem consequat sunt elit laboris adipisicing non proident eu est. Veniam ad cupidatat ex commodo mollit eiusmod. Excepteur do cillum incididunt consectetur pariatur ex sunt veniam dolor. Consectetur esse laborum culpa nostrud ut est commodo velit ad consectetur aliqua dolor. Mollit minim sunt mollit ullamco non ex dolore incididunt ullamco occaecat sunt id excepteur. Deserunt aliquip eu laborum cillum nostrud sint dolor reprehenderit minim adipisicing. Enim sit amet et.',
     ];
 });
@@ -21,12 +20,11 @@ it('requires authentication', function () {
 
 it('stores a post', function () {
     $user = User::factory()->create();
-    $data = value($this->validData);
 
-    actingAs($user)->post(route('posts.store'), $data);
+    actingAs($user)->post(route('posts.store'), $this->validData);
 
     $this->assertDatabaseHas(Post::class, [
-        ...$data,
+        ...$this->validData,
         'user_id' => $user->id,
     ]);
 });
@@ -35,13 +33,14 @@ it('redirects to the post show page', function () {
     $user = User::factory()->create();
 
     actingAs($user)
-        ->post(route('posts.store'), value($this->validData))
-        ->assertRedirect(Post::latest('id')->first()->showRoute());
+        ->post(route('posts.store'), $this->validData)
+       // ->assertRedirect(route('posts.show', Post::latest('id')->first()));
+       ->assertRedirect(Post::latest('id')->first()->showRoute()); // with slug
 });
 
 it('requires valid data', function (array $badData, array|string $errors) {
     actingAs(User::factory()->create())
-        ->post(route('posts.store'), [...value($this->validData), ...$badData])
+        ->post(route('posts.store'), [...$this->validData, ...$badData])
         ->assertInvalid($errors);
 })->with([
     [['title' => null], 'title'],
@@ -50,8 +49,6 @@ it('requires valid data', function (array $badData, array|string $errors) {
     [['title' => 1.5], 'title'],
     [['title' => str_repeat('a', 121)], 'title'],
     [['title' => str_repeat('a', 9)], 'title'],
-    [['topic_id' => null], 'topic_id'],
-    [['topic_id' => -1], 'topic_id'],
     [['body' => null], 'body'],
     [['body' => true], 'body'],
     [['body' => 1], 'body'],
