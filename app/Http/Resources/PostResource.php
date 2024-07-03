@@ -18,6 +18,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
         //    'user' => UserResource::make($this->user), //lazy load 
             'user' => $this->whenLoaded('user', fn () => UserResource::make($this->user)), //load relation user when we needed
+            'topic' => $this->whenLoaded('topic', fn () => TopicResource::make($this->topic)),
             'title' => $this->title,
             'body' => $this->body,
             'html' => $this->html,

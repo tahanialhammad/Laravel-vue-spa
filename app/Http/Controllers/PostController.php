@@ -6,7 +6,10 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\TopicResource;
 use App\Models\Post;
+use App\Models\Topic;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -18,16 +21,29 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     return inertia('Posts/Index', [
+    //         // 'posts' => Post::all(),
+    //         //  'posts' => PostResource::collection(Post::all()),
+    //         //  'posts' => PostResource::collection(Post::paginate()), //ega loaden is faster is by collection(Post::with('user')->paginate()) , it load all needed user in one query, but not all data we need fron user table , so we need to fix PostResource to load data only when we needed in vue 
+    //         //  'posts' => PostResource::collection(Post::latest()->latest('id')->paginate()), //this wil be ordered by creat_at then id, if tow post created at the same time
+    //         //for user name 
+    //         //'posts' => PostResource::collection(Post::with('user')->latest()->latest('id')->paginate()),
+    //         'posts' => PostResource::collection(Post::with(['user', 'topic'])->latest()->latest('id')->paginate()),
+    //     ]);
+    // }
+    public function index(Topic $topic = null)
     {
-        return inertia('Posts/Index', [
-            // 'posts' => Post::all(),
-            //  'posts' => PostResource::collection(Post::all()),
-            //  'posts' => PostResource::collection(Post::paginate()), //ega loaden is faster is by collection(Post::with('user')->paginate()) , it load all needed user in one query, but not all data we need fron user table , so we need to fix PostResource to load data only when we needed in vue 
-            //  'posts' => PostResource::collection(Post::latest()->latest('id')->paginate()), //this wil be ordered by creat_at then id, if tow post created at the same time
-            //for user name 
-            'posts' => PostResource::collection(Post::with('user')->latest()->latest('id')->paginate()),
+        $posts = Post::with(['user', 'topic'])
+            ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
+            ->latest()
+            ->latest('id')
+            ->paginate();
 
+        return inertia('Posts/Index', [
+            'posts' => PostResource::collection($posts),
+            'selectedTopic' => fn () => $topic ? TopicResource::make($topic) : null, //like inertia only 
         ]);
     }
 

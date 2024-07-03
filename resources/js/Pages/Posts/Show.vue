@@ -1,7 +1,9 @@
 <template>
     <AppLayout :title="post.title">
         <Container>
-            <h1 class="text-2xl font-bold">{{ post.title }}</h1>
+            <!-- <h1 class="text-2xl font-bold">{{ post.title }}</h1> -->
+            <PageHeading>{{ post.title }}</PageHeading>
+
             <span class="block mt-1 text-sm text-gray-600">{{ formattedDate }} ago by {{ post.user.name }}</span>
 
             <!-- <article class="mt-6">
@@ -54,6 +56,7 @@ import InputError from "@/Components/InputError.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {useConfirm} from "@/Utilities/Composables/useConfirm.js";
 import MarkdownEditor from "@/Components/MarkdownEditor.vue";
+import PageHeading from "@/Components/PageHeading.vue";
 
 const props = defineProps(['post', 'comments']);
 
