@@ -49,6 +49,9 @@ Route::middleware([
 
 // Posts
 // Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+//Route::resource('posts', PostController::class)->only(['index']); //remove show from this array and mae individual route to use slug for SEO
+//with topic option
+Route::get('posts/{topic?}', [PostController::class, 'index'])->name('posts.index');
+
 // Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('posts/{post}/{slug}', [PostController::class, 'show'])->name('posts.show'); // after use showroute with slug we can delete optionaly {slug?}'
-Route::resource('posts', PostController::class)->only(['index']); //remove show from this array and mae individual route to use slug for SEO
