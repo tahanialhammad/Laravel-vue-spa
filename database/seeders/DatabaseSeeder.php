@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\Topic;
 use App\Models\User;
@@ -39,6 +40,14 @@ class DatabaseSeeder extends Seeder
        // ->has(Post::factory(2))
        ->has(Post::factory(5)->recycle($topics))
         ->has(Comment::factory(20)->recycle($posts))
+        //one like for one post 
+        ->has(Like::factory()->forEachSequence(
+            // ['likeable_id' => $posts->first()],
+            // ['likeable_id' => $posts->last()]
+            //loop througth random posts
+            
+            ...$posts->random(15)->map(fn (Post $post) => ['likeable_id' => $post]),
+        ))
         ->create([
             'name' => 'Tahani',
             'email' => 'tahani@yahoo.com',
