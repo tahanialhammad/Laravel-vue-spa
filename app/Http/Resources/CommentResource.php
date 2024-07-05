@@ -16,11 +16,13 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-          //  'user' => UserResource::make($this->user),
-          //  'post' => PostResource::make($this->post),
-            'user' => $this->whenLoaded('user', fn () => UserResource::make($this->user)), 
-            'post' => $this->whenLoaded('post', fn () => PostResource::make($this->post)), 
-
+            // 'user' => UserResource::make($this->user),
+            // 'post' => PostResource::make($this->post),
+            // 'user' => $this->whenLoaded('user', fn () => UserResource::make($this->user)), 
+            // 'post' => $this->whenLoaded('post', fn () => PostResource::make($this->post)), 
+            //cleaner
+            'user' => UserResource::make($this->whenLoaded('user')),
+            'post' => PostResource::make($this->whenLoaded('post')),
             'body' => $this->body,
             'html' => $this->html,
 
