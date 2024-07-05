@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,5 +34,11 @@ class AppServiceProvider extends ServiceProvider
         //turn off mass assignment o
         Model::unguard();
 
+        //morphMany , custome value for morphy type
+
+        Relation::enforceMorphMap([
+            'post' => Post::class,
+            'comment' => Comment::class,
+        ]);
     }
 }
