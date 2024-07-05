@@ -1,4 +1,9 @@
 <template>
+    <!-- good for SEO pushed url wiht slug into html head, rel is relationalship -->
+        <Head>
+        <link rel="canonical" :href="post.routes.show" />
+    </Head>
+
     <AppLayout :title="post.title">
         <Container>
             <Pill :href="route('posts.index', {topic: post.topic.slug})">{{ post.topic.name }}</Pill>
@@ -6,7 +11,7 @@
             <!-- <h1 class="text-2xl font-bold">{{ post.title }}</h1> -->
             <PageHeading class="mt-2">{{ post.title }}</PageHeading>
             
-            <span class="block mt-1 text-sm text-gray-600">{{ formattedDate }} ago by {{ post.user.name }}</span>
+            <span class="block mt-1 text-sm text-gray-600">{{ formattedDate }} by {{ post.user.name }}</span>
 
             <!-- <article class="mt-6">
                 <pre class="whitespace-pre-wrap font-sans">{{ post.body }}</pre>
@@ -55,7 +60,7 @@ import Comment from "@/Components/Comment.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {router, useForm} from "@inertiajs/vue3";
+import {Head, router, useForm} from "@inertiajs/vue3";
 import TextArea from "@/Components/TextArea.vue";
 import InputError from "@/Components/InputError.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
