@@ -21,7 +21,7 @@
                     <div>
                         <InputLabel for="body" class="sr-only">Comment</InputLabel>
                         <!-- <TextArea ref="commentTextAreaRef" id="body" v-model="commentForm.body" rows="4" placeholder="Speak your mind Spock…"/> -->
-                        <MarkdownEditor ref="commentTextAreaRef" id="body" v-model="commentForm.body" placeholder="Speak your mind Spock…" editorClass="min-h-[100px]"/>
+                        <MarkdownEditor ref="commentTextAreaRef" id="body" v-model="commentForm.body" placeholder="Speak your mind Spock…" editorClass="!min-h-[100px]"/>
                         <InputError :message="commentForm.errors.body" class="mt-1" />
                     </div>
 
@@ -36,6 +36,9 @@
                 </ul>
 
                 <Pagination :meta="comments.meta" :only="['comments']"/>
+                <!-- fix pagination with flash message bug , we do that in compoponent  -->
+                <!-- <Pagination :meta="comments.meta" :only="['comments', 'jetstream']"/> -->
+
             </div>
         </Container>
     </AppLayout>
@@ -107,13 +110,34 @@ const updateComment = async () => {
     });
 };
 
+// const deleteComment = async (commentId) => {
+//     if (! await confirmation('Are you sure you want to delete this comment?')) {
+//         return;
+//     }
+
+//     router.delete(route('comments.destroy', {comment: commentId, page: props.comments.meta.current_page}), {
+//         preserveScroll: true,
+//     });
+// };
+
+//fix bug whene delete last commnts on paginathion 
 const deleteComment = async (commentId) => {
-    if (! await confirmation('Are you sure you want to delete this comment?')) {
+    if (
+        !(await confirmation("Are you sure you want to delete this comment?"))
+    ) {
         return;
     }
 
-    router.delete(route('comments.destroy', {comment: commentId, page: props.comments.meta.current_page}), {
-        preserveScroll: true,
-    });
+    router.delete(
+        route("comments.destroy", {
+            comment: commentId,
+            page: props.comments.data.length > 1
+                ? props.comments.meta.current_page
+                : Math.max(props.comments.meta.current_page - 1, 1) //or privoice page or page 1 if there are only 1 page
+        }),
+        {
+            preserveScroll: true,
+        },
+    );
 };
 </script>

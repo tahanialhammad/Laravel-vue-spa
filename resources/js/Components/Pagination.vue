@@ -63,6 +63,9 @@ const props = defineProps({
     }
 });
 
+// to fix showing flash message bug, whene go to next page
+//check if ther somthing in props if empty then load every thing , else then pass commentns and we extened only with jetstream
+const only = computed(() => props.only.length === 0 ? [] : [...props.only, 'jetstream']);
 
 const previousUrl = computed(() => props.meta.links[0].url); //for mobile only first item url and previous 
 const nextUrl = computed(() => [...props.meta.links].reverse()[0].url); //for mobile only first item url and next , becouse of reverse we must use orignal syntax
