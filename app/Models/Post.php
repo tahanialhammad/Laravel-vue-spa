@@ -24,6 +24,11 @@ class Post extends Model
     // }
     use ConvertsMarkdownToHtml;
 
+
+    //to load likes , we save it now in db, 
+    // protected $withCount= ['likes'];
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

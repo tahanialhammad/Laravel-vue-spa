@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->foreignIdFor(Post::class)->constrained()->cascadeOnDelete(); //whene delete a post , all realted comments wil be deleted
             $table->longText('body');
+            $table->unsignedBigInteger('likes_count')->default(0);
             $table->timestamps();
         });
     }
