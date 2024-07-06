@@ -101,8 +101,16 @@ class PostController extends Controller
 
         return inertia('Posts/Show', [
             // 'post' => PostResource::make($post), // fn () => It is faster because it is only executed when we need to pass to the front end.
-            'post' => fn () => PostResource::make($post),
-            'comments' => fn () => CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10)),
+           // 'post' => fn () => PostResource::make($post),
+           'post' => fn () => PostResource::make($post)->withLikePermission(),
+     //       'comments' => fn () => CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10)),
+     //becouse this is not a resouce that can use withLikePermission method directly , it is a collection , sp we tansferr coltion to resoce then use method  
+     'comments' => function () use ($post) {
+        $commentResource = CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10));
+        $commentResource->collection->transform(fn ($resource) => $resource->withLikePermission());
+
+        return $commentResource;
+    },
         ]);
     }
 
