@@ -47,6 +47,7 @@ Route::middleware([
     //all in one 
     Route::resource('posts.comments', CommentController::class)->shallow()->only(['store', 'update', 'destroy']);
     Route::post('/likes/{type}/{id}', [LikeController::class, 'store'])->name('likes.store');
+    Route::delete('/likes/{type}/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');
 });
 
 // Posts
