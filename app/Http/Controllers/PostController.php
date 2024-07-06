@@ -50,26 +50,28 @@ class PostController extends Controller
     // }
 
 //search 
-public function index(Request $request, Topic $topic = null)
-{
-    $posts = Post::with(['user', 'topic'])
-        ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
-        //check if we have search query, then run fun to filter resulte with word in title or in body, % is any charcter, using where(...) + orwhere(...) === whereAny([...],...)
-        ->when(
-            $request->query('query'),
-            fn (Builder $query) => $query->whereAny(['title', 'body'], 'like', '%' . $request->query('query') . '%')
-        )
-        ->latest()
-        ->latest('id')
-        ->paginate();
 
-    return inertia('Posts/Index', [
-        'posts' => PostResource::collection($posts),
-        'topics' => fn () => TopicResource::collection(Topic::all()),
-        'selectedTopic' => fn () => $topic ? TopicResource::make($topic) : null,
-        'query' => $request->query('query'),
-    ]);
-}
+        public function index(Request $request, Topic $topic = null)
+        {
+            $posts = Post::with(['user', 'topic'])
+                ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
+                        //check if we have search query, then run fun to filter resulte with word in title or in body, % is any charcter, using where(...) + orwhere(...) === whereAny([...],...)
+                ->when(
+                    $request->query('query'),
+                    fn (Builder $query) => $query->whereAny(['title', 'body'], 'like', '%' . $request->query('query') . '%')
+                )
+                ->latest()
+                ->latest('id')
+                ->paginate()
+                ->withQueryString(); // when using search pagination must stil work with all serach results
+    
+            return inertia('Posts/Index', [
+                'posts' => PostResource::collection($posts),
+                'topics' => fn () => TopicResource::collection(Topic::all()),
+                'selectedTopic' => fn () => $topic ? TopicResource::make($topic) : null,
+                'query' => $request->query('query'),
+            ]);
+        }
     /**
      * Show the form for creating a new resource.
      */
