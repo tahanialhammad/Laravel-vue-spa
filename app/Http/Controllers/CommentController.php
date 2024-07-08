@@ -17,20 +17,15 @@ class CommentController extends Controller
     {
         $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
 
-        //  $comment = Comment::make($data);
         Comment::create([
             ...$data,
             'post_id' => $post->id,
             'user_id' => $request->user()->id,
         ]);
 
-        //redirect
-        // return to_route('posts.show', $post)
-        // ->banner('Comment added.'); // is macro flash message from jetstream banner componenet 
-       
-        //use new redriect with slug
+
         return redirect($post->showRoute())
-        ->banner('Comment added.');
+            ->banner('Comment added.');
     }
     /**
      * Update the specified resource in storage.
@@ -38,18 +33,15 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         //authorize in resource & policy
-         Gate::authorize('update', $comment); 
+        Gate::authorize('update', $comment);
 
-        $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
+        $data = $request->validate(
+            ['body' => ['required', 'string', 'max:2500']]
+        );
 
         $comment->update($data);
-
-        // return to_route('posts.show', ['post' => $comment->post_id, 'page' => $request->query('page')])
-        // ->banner('Comment updated.');
-
-        //use slug
         return redirect($comment->post->showRoute(['page' => $request->query('page')]))
-        ->banner('Comment updated.');
+            ->banner('Comment updated.');
     }
 
     /**
@@ -57,27 +49,14 @@ class CommentController extends Controller
      */
     public function destroy(Request $request, Comment $comment)
     {
-        //if user not oner of this comment
         if ($request->user()->id !== $comment->user_id) {
             abort(403);
         }
         // use policy
-        //    $this->authorize('delete', $comment); // this was in laravel 10
-        //laravel 11 v23 Jeffrey way
-       // Gate::authorize('delete', $comment); //i think is no need to do that , its now in resource
-
 
         $comment->delete();
-        // Redirect to post_id and not the whole post form to avoid doing the query again
-      //  return to_route('posts.show', $comment->post_id);
-      
-      //to return to show and with the same page in pagination , but we need to update delete form by emit
-        // return to_route('posts.show', ['post' => $comment->post_id, 'page' => $request->query('page')])
-        // ->banner('Comment deleted.');
-
         //use slug
         return redirect($comment->post->showRoute(['page' => $request->query('page')]))
-        ->banner('Comment deleted.');
-
+            ->banner('Comment deleted.');
     }
 }
