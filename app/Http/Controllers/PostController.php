@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -37,11 +38,13 @@ class PostController extends Controller
     // }
 
     //search 
+
     public function index(Request $request, Topic $topic = null)
     {
         $posts = Post::with(['user', 'topic'])
             ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
             // where(...) + orwhere(...) === whereAny([...],...)
+
             ->when(
                 $request->query('query'),
                 fn (Builder $query) => $query->whereAny(['title', 'body'], 'like', '%' . $request->query('query') . '%')
@@ -72,7 +75,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     // public function store(StorePostRequest $request)
+
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -107,11 +112,14 @@ class PostController extends Controller
         $post->load('user', 'topic');
 
         return inertia('Posts/Show', [
+
             // 'post' => PostResource::make($post), // fn () => It is faster because it is only executed when we need to pass to the front end.
             // 'post' => fn () => PostResource::make($post),
             'post' => fn () => PostResource::make($post)->withLikePermission(),
             //       'comments' => fn () => CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10)),
             //becouse this is not a resouce that can use withLikePermission method directly , it is a collection , sp we tansferr coltion to resoce then use method  
+
+            'post' => fn () => PostResource::make($post)->withLikePermission(),
             'comments' => function () use ($post) {
                 $commentResource = CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10));
                 $commentResource->collection->transform(fn ($resource) => $resource->withLikePermission());
