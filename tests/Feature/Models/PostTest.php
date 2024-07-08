@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Post;
+use Illuminate\Support\Str;
+
 
 it('uses title case for titles', function () {
     $post = Post::factory()->create(['title' => 'Hello, how are you?']);

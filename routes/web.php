@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SiteController;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
@@ -18,14 +19,14 @@ Route::get('/test', function () {
 });
 
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Home/Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 
 Route::middleware([
@@ -49,6 +50,20 @@ Route::middleware([
     Route::post('/likes/{type}/{id}', [LikeController::class, 'store'])->name('likes.store');
     Route::delete('/likes/{type}/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');
 });
+
+
+
+
+// Site
+Route::controller(SiteController::class)->group(function () {
+    Route::get('/', 'index')->name('welcome');
+    // Route::get('/helpcenter', 'helpcenter')->name('site.helpcenter.index');
+    // Route::get('/helpcenter/{section}', 'helpcenterShow')->name('site.helpcenter.show');
+    // Route::get('/services', 'services')->name('site.services.index');
+});
+
+
+
 
 // Posts
 // Route::get('posts', [PostController::class, 'index'])->name('posts.index');
