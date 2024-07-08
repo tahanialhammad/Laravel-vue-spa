@@ -21,19 +21,6 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     return inertia('Posts/Index', [
-    //         // 'posts' => Post::all(),
-    //         //  'posts' => PostResource::collection(Post::all()),
-    //         //  'posts' => PostResource::collection(Post::paginate()), //ega loaden is faster is by collection(Post::with('user')->paginate()) , it load all needed user in one query, but not all data we need fron user table , so we need to fix PostResource to load data only when we needed in vue 
-    //         //  'posts' => PostResource::collection(Post::latest()->latest('id')->paginate()), //this wil be ordered by creat_at then id, if tow post created at the same time
-    //         //for user name 
-    //         //'posts' => PostResource::collection(Post::with('user')->latest()->latest('id')->paginate()),
-    //         'posts' => PostResource::collection(Post::with(['user', 'topic'])->latest()->latest('id')->paginate()),
-    //     ]);
-    // }
-    
     // public function index(Topic $topic = null)
     // {
     //     $posts = Post::with(['user', 'topic'])
@@ -49,36 +36,34 @@ class PostController extends Controller
     //     ]);
     // }
 
-//search 
+    //search 
+    public function index(Request $request, Topic $topic = null)
+    {
+        $posts = Post::with(['user', 'topic'])
+            ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
+            // where(...) + orwhere(...) === whereAny([...],...)
+            ->when(
+                $request->query('query'),
+                fn (Builder $query) => $query->whereAny(['title', 'body'], 'like', '%' . $request->query('query') . '%')
+            )
+            ->latest()
+            ->latest('id')
+            ->paginate()
+            ->withQueryString(); // when using search pagination must stil work with all serach results
 
-        public function index(Request $request, Topic $topic = null)
-        {
-            $posts = Post::with(['user', 'topic'])
-                ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
-                        //check if we have search query, then run fun to filter resulte with word in title or in body, % is any charcter, using where(...) + orwhere(...) === whereAny([...],...)
-                ->when(
-                    $request->query('query'),
-                    fn (Builder $query) => $query->whereAny(['title', 'body'], 'like', '%' . $request->query('query') . '%')
-                )
-                ->latest()
-                ->latest('id')
-                ->paginate()
-                ->withQueryString(); // when using search pagination must stil work with all serach results
-    
-            return inertia('Posts/Index', [
-                'posts' => PostResource::collection($posts),
-                'topics' => fn () => TopicResource::collection(Topic::all()),
-                'selectedTopic' => fn () => $topic ? TopicResource::make($topic) : null,
-                'query' => $request->query('query'),
-            ]);
-        }
+        return inertia('Posts/Index', [
+            'posts' => PostResource::collection($posts),
+            'topics' => fn () => TopicResource::collection(Topic::all()),
+            'selectedTopic' => fn () => $topic ? TopicResource::make($topic) : null,
+            'query' => $request->query('query'),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         Gate::authorize('create', Post::class);
-      //  return inertia('Posts/Create');
         return inertia('Posts/Create', [
             'topics' => fn () => TopicResource::collection(Topic::all()),
         ]);
@@ -88,7 +73,6 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      */
     // public function store(StorePostRequest $request)
-
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -102,7 +86,7 @@ class PostController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-      //  return to_route('posts.show', $post);
+        //  return to_route('posts.show', $post);
         //use slug 
         return redirect($post->showRoute());
     }
@@ -111,11 +95,11 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request , Post $post)
+    public function show(Request $request, Post $post)
     {
         //use request to update slug url 
         // if (! Str::contains($post->showRoute(), $request->path())) {
-            if (! Str::endsWith($post->showRoute(), $request->path())) {
+        if (!Str::endsWith($post->showRoute(), $request->path())) {
 
             return redirect($post->showRoute($request->query()), status: 301); //give page of any other pram
         }
@@ -124,16 +108,16 @@ class PostController extends Controller
 
         return inertia('Posts/Show', [
             // 'post' => PostResource::make($post), // fn () => It is faster because it is only executed when we need to pass to the front end.
-           // 'post' => fn () => PostResource::make($post),
-           'post' => fn () => PostResource::make($post)->withLikePermission(),
-     //       'comments' => fn () => CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10)),
-     //becouse this is not a resouce that can use withLikePermission method directly , it is a collection , sp we tansferr coltion to resoce then use method  
-     'comments' => function () use ($post) {
-        $commentResource = CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10));
-        $commentResource->collection->transform(fn ($resource) => $resource->withLikePermission());
+            // 'post' => fn () => PostResource::make($post),
+            'post' => fn () => PostResource::make($post)->withLikePermission(),
+            //       'comments' => fn () => CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10)),
+            //becouse this is not a resouce that can use withLikePermission method directly , it is a collection , sp we tansferr coltion to resoce then use method  
+            'comments' => function () use ($post) {
+                $commentResource = CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10));
+                $commentResource->collection->transform(fn ($resource) => $resource->withLikePermission());
 
-        return $commentResource;
-    },
+                return $commentResource;
+            },
         ]);
     }
 

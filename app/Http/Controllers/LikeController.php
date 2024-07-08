@@ -17,8 +17,8 @@ class LikeController extends Controller
     public function store(Request $request, string $type, int $id)
     {
         $likeable = $this->findLikeable($type, $id);
-     //   $this->authorize('create', [Like::class, $likeable]);
-     Gate::authorize('create', [Like::class, $likeable]);
+        //   $this->authorize('create', [Like::class, $likeable]);
+        Gate::authorize('create', [Like::class, $likeable]);
 
         $likeable->likes()->create([
             'user_id' => $request->user()->id,
@@ -34,7 +34,6 @@ class LikeController extends Controller
     public function destroy(Request $request, string $type, int $id)
     {
         $likeable = $this->findLikeable($type, $id);
-        //   $this->authorize('delete', [Like::class, $likeable]);
         Gate::authorize('delete', [Like::class, $likeable]);
 
         $likeable->likes()->whereBelongsTo($request->user())->delete();

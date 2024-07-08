@@ -14,7 +14,7 @@ it('requires authentication', function () {
 
 it('can delete a comment', function () {
     $comment = Comment::factory()->create();
-//login
+    //login
     actingAs($comment->user)->delete(route('comments.destroy', $comment));
 
     $this->assertModelMissing($comment);
@@ -22,10 +22,10 @@ it('can delete a comment', function () {
 
 it('redirects to the post show page', function () {
     $comment = Comment::factory()->create();
-//comment must be crreated by this user
+    //comment must be crreated by this user
     actingAs($comment->user)
         ->delete(route('comments.destroy', $comment))
-      //  ->assertRedirect(route('posts.show', $comment->post_id));
+        //  ->assertRedirect(route('posts.show', $comment->post_id));
         ->assertRedirect($comment->post->showRoute()); // with slug
 });
 
@@ -34,26 +34,26 @@ it('redirects to the post show page with the page query parameter', function () 
 
     actingAs($comment->user)
         ->delete(route('comments.destroy', ['comment' => $comment, 'page' => 2]))
-       // ->assertRedirect(route('posts.show', ['post' => $comment->post_id, 'page' => 2]));
-       ->assertRedirect($comment->post->showRoute(['page' => 2]));
+        // ->assertRedirect(route('posts.show', ['post' => $comment->post_id, 'page' => 2]));
+        ->assertRedirect($comment->post->showRoute(['page' => 2]));
 });
 
 it('prevents deleting a comment you didnt create', function () {
     $comment = Comment::factory()->create();
-//act as new user
+    //act as new user
     actingAs(User::factory()->create())
         ->delete(route('comments.destroy', $comment))
         ->assertForbidden();
 });
 
-// NOT WORK ERROR
-// it('prevents deleting a comment posted over an hour ago', function () {
-//     $this->freezeTime();
-//     $comment = Comment::factory()->create();
+// WAS NOT WORK ERROR
+it('prevents deleting a comment posted over an hour ago', function () {
+    $this->freezeTime();
+    $comment = Comment::factory()->create();
 
-//     $this->travel(1)->hour();
+    $this->travel(1)->hour();
 
-//     actingAs($comment->user)
-//         ->delete(route('comments.destroy', $comment))
-//         ->assertForbidden();
-// });
+    actingAs($comment->user)
+        ->delete(route('comments.destroy', $comment))
+        ->assertForbidden();
+});

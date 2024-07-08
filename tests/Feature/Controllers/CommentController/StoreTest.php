@@ -18,11 +18,11 @@ it('can store a comment', function () {
     //we need a user and post to store a comment on it 
     $user = User::factory()->create();
     $post = Post::factory()->create();
-//we need to login
+    //we need to login
     actingAs($user)->post(route('posts.comments.store', $post), [
         'body' => 'This is a comment',
     ]);
-//validation
+    //validation
     $this->assertDatabaseHas(Comment::class, [
         'post_id' => $post->id,
         'user_id' => $user->id,
@@ -37,8 +37,8 @@ it('redirects to the post show page', function () {
         ->post(route('posts.comments.store', $post), [
             'body' => 'This is a comment',
         ])
-      //  ->assertRedirect(route('posts.show', $post));
-      ->assertRedirect($post->showRoute()); // with slug
+        //  ->assertRedirect(route('posts.show', $post));
+        ->assertRedirect($post->showRoute()); // with slug
 });
 
 it('requires a valid body', function ($value) {
@@ -49,7 +49,7 @@ it('requires a valid body', function ($value) {
             'body' => $value,
         ])
         ->assertInvalid('body');
-// test some scenario that user send it as a comment
+    // test some scenario that user send it as a comment
 })->with([
     null,
     1,

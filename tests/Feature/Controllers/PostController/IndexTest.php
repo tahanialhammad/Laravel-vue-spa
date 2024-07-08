@@ -26,8 +26,8 @@ it('should return the correct component', function () {
 //test resources and pagination v9
 it('passes posts to the view', function () {
   $posts = Post::factory(3)->create();
- // $posts->load('user');
- $posts->load(['user', 'topic']);
+  // $posts->load('user');
+  $posts->load(['user', 'topic']);
 
   get(route('posts.index'))
     //this macro function is extracted in testingprovider :  php artisan make:provider TestingServiceProvider
@@ -49,12 +49,12 @@ it('can filter to a topic', function () {
   $posts->load(['user', 'topic']);
 
   get(route('posts.index', ['topic' => $general]))
-      ->assertHasPaginatedResource('posts', PostResource::collection($posts->reverse()));
+    ->assertHasPaginatedResource('posts', PostResource::collection($posts->reverse()));
 });
 
 it('passes the selected topic to the view', function () {
   $topic = Topic::factory()->create();
 
   get(route('posts.index', ['topic' => $topic]))
-      ->assertHasResource('selectedTopic', TopicResource::make($topic));
+    ->assertHasResource('selectedTopic', TopicResource::make($topic));
 });

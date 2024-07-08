@@ -51,7 +51,7 @@ class Post extends Model
         return Attribute::set(fn ($value) => Str::title($value));
     }
 
-//body and html, but its not best practice becouse we wil call this with every single edit on the post, so we go to use listener to event on the model
+    //body and html, but its not best practice becouse we wil call this with every single edit on the post, so we go to use listener to event on the model
     // public function body(): Attribute
     // {
     //     return Attribute::set(fn ($value) => [
