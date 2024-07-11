@@ -51,6 +51,8 @@ class DatabaseSeeder extends Seeder
         ->create([
             'name' => 'Tahani',
             'email' => 'tahani@yahoo.com',
+            'is_admin' =>true,
+
         ]);
     }
 }

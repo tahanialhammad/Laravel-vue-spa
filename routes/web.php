@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SiteController;
@@ -13,6 +15,7 @@ use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Middleware\IsAdminMiddleware;
 
 Route::get('/test', function () {
     // return UserResource::make(User::find(1));
@@ -28,15 +31,33 @@ Route::get('/test', function () {
 //     ]);
 // });
 
+// Auth only admin
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    IsAdminMiddleware::class,
+])->group(function () {
+ //   Route::get('admindashboard', [AdminController::class, 'dashboard'])->name('admindashboard');
+});
+
+
+
+
+
+
+
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+
+    // Route::get('/dashboard', function () {
+    //     return Inertia::render('Dashboard');
+    // })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Post all in one 
     Route::resource('posts', PostController::class)->only(['create', 'store']);

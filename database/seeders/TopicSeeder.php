@@ -15,29 +15,54 @@ class TopicSeeder extends Seeder
     {
         $data = [
             [
-                'slug' => 'general',
-                'name' => 'General',
-                'description' => 'Any and all things about films and movies.',
+                'slug' => 'html-css',
+                'name' => 'HTML & CSS',
+                'description' => 'All about the building blocks of the web - HTML and CSS.',
             ],
             [
-                'slug' => 'reviews',
-                'name' => 'Reviews',
-                'description' => 'What\'s the census on that latest flick? Read all about it here!'
+                'slug' => 'javascript',
+                'name' => 'JavaScript',
+                'description' => 'Discussions and questions about JavaScript, the language of the web.',
             ],
             [
-                'slug' => 'questions',
-                'name' => 'Questions',
-                'description' => 'Didn\'t quite understand that one plot point? There are no stupid questions here.',
+                'slug' => 'frontend-frameworks',
+                'name' => 'Frontend Frameworks',
+                'description' => 'Talk about frameworks like React, Angular, Vue.js, and others.',
             ],
             [
-                'slug' => 'conspiracies',
-                'name' => 'Conspiracies',
-                'description' => 'Got a wild idea about how The Incredibles and Monster\'s Inc. are connected? Spill the beans!',
+                'slug' => 'backend-development',
+                'name' => 'Backend Development',
+                'description' => 'Dive into server-side languages and frameworks like Node.js, Django, Laravel, and more.',
             ],
             [
-                'slug' => 'fan-fic',
-                'name' => 'Fan Fiction',
-                'description' => 'Got a great idea for a sequel? Tell us all about it and get the audience opinion.'
+                'slug' => 'databases',
+                'name' => 'Databases',
+                'description' => 'Everything related to databases - SQL, NoSQL, database design, and optimization.',
+            ],
+            [
+                'slug' => 'devops',
+                'name' => 'DevOps',
+                'description' => 'Discuss CI/CD, cloud services, containerization, and other DevOps practices.',
+            ],
+            [
+                'slug' => 'web-security',
+                'name' => 'Web Security',
+                'description' => 'Topics on web security practices, vulnerabilities, and solutions.',
+            ],
+            [
+                'slug' => 'ui-ux-design',
+                'name' => 'UI/UX Design',
+                'description' => 'Talk about user interface and user experience design principles and tools.',
+            ],
+            [
+                'slug' => 'career-advice',
+                'name' => 'Career Advice',
+                'description' => 'Get advice on starting and advancing your career in web development.',
+            ],
+            [
+                'slug' => 'project-showcase',
+                'name' => 'Project Showcase',
+                'description' => 'Share your web development projects and get feedback from the community.',
             ]
         ];
 
