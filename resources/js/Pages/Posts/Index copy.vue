@@ -2,7 +2,9 @@
     <AppLayout>
         <Container>
             <div>
-                <PageHeading v-text="selectedTopic ? selectedTopic.name : 'All Posts'" />
+                <PageHeading
+                    v-text="selectedTopic ? selectedTopic.name : 'All Posts'"
+                />
                 <p v-if="selectedTopic" class="mt-1 text-sm text-gray-600">
                     {{ selectedTopic.description }}
                 </p>
@@ -10,9 +12,8 @@
                 <menu class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
                     <li>
                         <!-- <Pill :href="route('posts.index')" :filled="! selectedTopic">All Posts</Pill> -->
-                        <!-- to seve search by topic -->
-                        <Pill :href="route('posts.index', { query: searchForm.query })" :filled="!selectedTopic">All
-                            Posts</Pill>
+<!-- to seve search by topic -->
+                        <Pill :href="route('posts.index', { query: searchForm.query })" :filled="! selectedTopic">All Posts</Pill>
 
                     </li>
                     <li v-for="topic in topics" :key="topic.id">
@@ -21,10 +22,11 @@
                         >
                             {{ topic.name }}
                         </Pill> -->
-                        <!-- to seve search by topic -->
+<!-- to seve search by topic -->
 
                         <Pill :href="route('posts.index', { topic: topic.slug, query: searchForm.query })"
-                            :filled="topic.id === selectedTopic?.id">
+                              :filled="topic.id === selectedTopic?.id"
+                        >
                             {{ topic.name }}
                         </Pill>
                     </li>
@@ -34,7 +36,7 @@
                     <div>
                         <InputLabel for="query">Search</InputLabel>
                         <div class="flex space-x-2 mt-1">
-                            <TextInput v-model="searchForm.query" class="w-full" id="query" />
+                            <TextInput v-model="searchForm.query" class="w-full" id="query"/>
                             <SecondaryButton type="submit">Search</SecondaryButton>
                             <DangerButton v-if="searchForm.query" @click="clearSearch">Clear</DangerButton>
 
@@ -43,9 +45,31 @@
                 </form>
 
             </div>
-
-
-            <CardsGrid :posts="posts.data" :formattedDate="formattedDate" />
+            <ul class="mt-4 divide-y">
+                <li
+                    v-for="post in posts.data"
+                    :key="post.id"
+                    class="flex flex-col items-baseline justify-between md:flex-row"
+                >
+                    <Link
+                        :href="post.routes.show"
+                        class="group block px-2 py-4"
+                    >
+                        <span
+                            class="text-lg font-bold group-hover:text-indigo-500"
+                            >{{ post.title }}</span
+                        >
+                        <span
+                            class="block pt-1 text-sm text-gray-600 first-letter:uppercase"
+                            >{{ formattedDate(post) }} by
+                            {{ post.user.name }}</span
+                        >
+                    </Link>
+                    <Pill :href="route('posts.index', { topic: post.topic.slug })">
+                        {{ post.topic.name }}
+                    </Pill>
+                </li>
+            </ul>
 
             <Pagination :meta="posts.meta" :only="['posts']" class="mt-2" />
         </Container>
@@ -64,12 +88,18 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import CardsGrid from "@/Components/CardsGrid.vue";
 
+// defineProps(["posts", "topics", "selectedTopic"]);
 //from controller, to detect what is in query
 const props = defineProps(["posts", "topics", "selectedTopic", "query"]);
 
 const formattedDate = (post) => relativeDate(post.created_at);
+
+// const searchForm = useForm({
+//   //  query: '', //default value
+//     query: props.query, //to detect what is in query
+// });
+// const search = () => searchForm.get(route('posts.index'));
 
 //to search within all posts or within topic
 const searchForm = useForm({
