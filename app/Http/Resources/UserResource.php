@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'profile_photo_url' => $this->profile_photo_url,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
+            'is_admin' => $this->is_admin,
         ];
     }
 }

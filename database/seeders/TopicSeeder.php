@@ -40,30 +40,10 @@ class TopicSeeder extends Seeder
                 'description' => 'Everything related to databases - SQL, NoSQL, database design, and optimization.',
             ],
             [
-                'slug' => 'devops',
-                'name' => 'DevOps',
-                'description' => 'Discuss CI/CD, cloud services, containerization, and other DevOps practices.',
-            ],
-            [
-                'slug' => 'web-security',
-                'name' => 'Web Security',
-                'description' => 'Topics on web security practices, vulnerabilities, and solutions.',
-            ],
-            [
                 'slug' => 'ui-ux-design',
                 'name' => 'UI/UX Design',
                 'description' => 'Talk about user interface and user experience design principles and tools.',
             ],
-            [
-                'slug' => 'career-advice',
-                'name' => 'Career Advice',
-                'description' => 'Get advice on starting and advancing your career in web development.',
-            ],
-            [
-                'slug' => 'project-showcase',
-                'name' => 'Project Showcase',
-                'description' => 'Share your web development projects and get feedback from the community.',
-            ]
         ];
 
         Topic::upsert($data, ['slug']);

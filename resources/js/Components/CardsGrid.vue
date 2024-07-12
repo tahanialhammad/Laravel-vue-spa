@@ -34,7 +34,9 @@
             <p class="font-semibold text-gray-900">
               {{ post.user.name }}
             </p>
-            <p class="text-gray-600">user role</p>
+            <p class="text-gray-600">
+              {{ post.user.is_admin ? "Admin" : "User" }} role
+            </p>
           </div>
         </div>
 
