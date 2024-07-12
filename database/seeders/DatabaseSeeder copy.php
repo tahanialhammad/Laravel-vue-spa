@@ -26,7 +26,13 @@ class DatabaseSeeder extends Seeder
         $services = Service::factory(2)->create();
         $packages = Package::factory(2)->create();
 
-        $users = User::factory(10)->create();
+        $users = User::factory(10)
+      //  ->has(Post::factory(2))
+        ->create();
+
+        // $posts= Post::factory(20)
+        // ->has(Comment::factory(15)->recycle($users));
+        // //$comments = Comment::factory(20)->recycle($users)->recycle($posts)->create();
 
         $posts = Post::factory(20)
         ->has(Comment::factory(15)->recycle($users))
@@ -36,9 +42,15 @@ class DatabaseSeeder extends Seeder
 
 
         User::factory()
+       // ->has(Post::factory(2))
        ->has(Post::factory(5)->recycle($topics))
         ->has(Comment::factory(20)->recycle($posts))
+        //one like for one post 
         ->has(Like::factory()->forEachSequence(
+            // ['likeable_id' => $posts->first()],
+            // ['likeable_id' => $posts->last()]
+            //loop througth random posts
+            
             ...$posts->random(15)->map(fn (Post $post) => ['likeable_id' => $post]),
         ))
         ->create([
