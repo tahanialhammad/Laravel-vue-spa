@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteController;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PostResource;
@@ -94,3 +95,7 @@ Route::get('posts/{topic?}', [PostController::class, 'index'])->name('posts.inde
 
 // Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('posts/{post}/{slug}', [PostController::class, 'show'])->name('posts.show'); // after use showroute with slug we can delete optionaly {slug?}'
+
+
+// Service 
+Route::get('services/', [ServiceController::class, 'index'])->name('services.index');
