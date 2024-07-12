@@ -52,7 +52,12 @@ const menu = [
         when: () => usePage().props.auth.user,
         //account weet w week to can creat posts in policy
         //   when: () => usePage().props.permissions.create_posts,
-    }
+    },
+    {
+        name: "Services",
+        url: route('services.index'),
+        route: 'services.index',
+    },
 ];
 </script>
 

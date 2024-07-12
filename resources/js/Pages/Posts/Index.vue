@@ -38,7 +38,7 @@
             </div>
 
 
-            <CardsGrid :posts="posts.data" :formattedDate="formattedDate" />
+            <PostsCardsGrid :posts="posts.data" :formattedDate="formattedDate" />
 
             <Pagination :meta="posts.meta" :only="['posts']" class="mt-2" />
         </Container>
@@ -57,7 +57,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import CardsGrid from "@/Components/CardsGrid.vue";
+import PostsCardsGrid from "@/Components/PostsCardsGrid.vue";
 
 //from controller, to detect what is in query
 const props = defineProps(["posts", "topics", "selectedTopic", "query"]);
