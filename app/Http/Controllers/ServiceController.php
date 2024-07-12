@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Http\Resources\ServiceResource;
 
 class ServiceController extends Controller
 {
@@ -14,7 +15,8 @@ class ServiceController extends Controller
     public function index()
     {
         return inertia('Services/Index', [
-            'services' => Service::latest()->latest('id')->paginate()
+            // 'services' => Service::latest()->latest('id')->paginate(),
+            'services' => ServiceResource::collection(Service::all())
         ]);
     }
 
