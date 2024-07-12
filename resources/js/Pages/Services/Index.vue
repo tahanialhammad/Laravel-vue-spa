@@ -4,7 +4,7 @@
             <div class="mx-auto max-w-7xl px-6 lg:px-8 py-6 my-6">
                 <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
-                    <Card v-for="service in services" :key="service.id">
+                    <Card v-for="service in services.data" :key="service.id">
                         <template #cardHeader>
                             {{ service.title }}
                         </template>
@@ -12,7 +12,8 @@
                             {{ service.description }}
                         </template>
                         <template #cardFooter>
-                            {{ service.id }}
+                            Last upade at :
+                            {{ formattedDate(service) }}
                         </template>
                     </Card>
 
@@ -33,7 +34,6 @@ import { defineProps } from "vue";
 import Card from "@/Components/Card.vue";
 
 defineProps(['services']);
+const formattedDate = (service) => relativeDate(service.updated_at);
 
-// Function to format date using relativeDate function
-const formattedDate = (service) => relativeDate(service.created_at);
 </script>

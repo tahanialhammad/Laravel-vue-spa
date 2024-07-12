@@ -15,8 +15,7 @@ class ServiceController extends Controller
     public function index()
     {
         return inertia('Services/Index', [
-            // 'services' => Service::latest()->latest('id')->paginate(),
-            'services' => ServiceResource::collection(Service::all())
+            'services' => ServiceResource::collection(Service::latest()->latest('id')->paginate())
         ]);
     }
 
