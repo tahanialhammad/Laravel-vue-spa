@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Http\Resources\PackageResource;
 use App\Http\Resources\ServiceResource;
+use App\Models\Package;
 
 class ServiceController extends Controller
 {
@@ -14,8 +16,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return inertia('Services/Index', [
-            'services' => ServiceResource::collection(Service::latest()->latest('id')->paginate())
+   //     $services = ServiceResource::collection(Service::latest()->latest('id')->paginate());
+   $services = ServiceResource::collection(Service::with('packages')->latest()->paginate());
+
+        return inertia('Services/Index', [           
+            'services' => $services,
+            'packageItems' => PackageResource::collection(Package::all()),
         ]);
     }
 

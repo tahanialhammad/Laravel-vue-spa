@@ -1,6 +1,9 @@
 <template>
     <AppLayout>
         <Container>
+
+            <PackagesList :packageItems="packageItems" />
+
             <div class="mx-auto max-w-7xl px-6 lg:px-8 py-6 my-6">
                 <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
@@ -9,7 +12,15 @@
                             {{ service.title }}
                         </template>
                         <template #cardBody>
-                            {{ service.description }}
+                            <p>
+                                {{ service.description }}
+                            </p>
+                            <div class="flex space-x-1">
+                                <img v-for="packageItem in service.packages" :key="packageItem.id" class="max-h-4"
+                                    :src="`/assests/packages/${packageItem.code.toLowerCase()}.svg`"
+                                    :alt="packageItem.code" />
+                            </div>
+
                         </template>
                         <template #cardFooter>
                             Last upade at :
@@ -32,8 +43,9 @@ import { formatDistance, parseISO } from "date-fns";
 import { relativeDate } from "@/Utilities/date.js";
 import { defineProps } from "vue";
 import Card from "@/Components/Card.vue";
+import PackagesList from "@/Pages/Services/Partials/PackagesList.vue";
 
-defineProps(['services']);
+defineProps(['services', 'packageItems']);
 const formattedDate = (service) => relativeDate(service.updated_at);
 
 </script>
