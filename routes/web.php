@@ -99,3 +99,5 @@ Route::get('posts/{post}/{slug}', [PostController::class, 'show'])->name('posts.
 
 // Service 
 Route::get('services/', [ServiceController::class, 'index'])->name('services.index');
+Route::get('services/{service}/{slug?}', [ServiceController::class, 'show'])->name('services.show'); 
+

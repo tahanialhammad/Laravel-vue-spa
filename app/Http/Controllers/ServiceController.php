@@ -46,7 +46,11 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+       $service->load('packages');
+
+        return inertia('Services/Show',[
+            'service' => ServiceResource::make($service),
+        ]);
     }
 
     /**
