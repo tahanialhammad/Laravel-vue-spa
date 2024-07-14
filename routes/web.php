@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteController;
@@ -40,6 +41,10 @@ Route::middleware([
     IsAdminMiddleware::class,
 ])->group(function () {
  //   Route::get('admindashboard', [AdminController::class, 'dashboard'])->name('admindashboard');
+
+ //Services and packages
+// Route::resource('packages', PackageController::class)->only(['store', 'update', 'destroy']);
+
 });
 
 
@@ -71,6 +76,13 @@ Route::middleware([
     Route::resource('posts.comments', CommentController::class)->shallow()->only(['store', 'update', 'destroy']);
     Route::post('/likes/{type}/{id}', [LikeController::class, 'store'])->name('likes.store');
     Route::delete('/likes/{type}/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');
+
+
+
+
+    //test
+    Route::resource('packages', PackageController::class)->only(['store', 'update', 'destroy']);
+
 });
 
 
@@ -100,4 +112,8 @@ Route::get('posts/{post}/{slug}', [PostController::class, 'show'])->name('posts.
 // Service 
 Route::get('services/', [ServiceController::class, 'index'])->name('services.index');
 Route::get('services/{service}/{slug}', [ServiceController::class, 'show'])->name('services.show'); 
+
+//packages
+Route::get('packages/', [PackageController::class, 'index'])->name('packages.index');
+Route::get('packages/{package}/{slug?}', [PackageController::class, 'show'])->name('packages.show'); 
 

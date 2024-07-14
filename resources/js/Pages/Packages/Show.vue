@@ -1,19 +1,19 @@
 <template>
 
     <Head>
-        <link rel="canonical" :href="service.routes.show" />
+        <link rel="canonical" :href="packageItem.routes.show" />
     </Head>
 
-    <AppLayout :title="service.title">
+    <AppLayout :title="packageItem.code">
         <Container>
             <h1>
-                {{ service.title }}
+                {{ packageItem.code }}
             </h1>
-            <pre class="whitespace-pre-wrap font-sans">
-                {{ service.description }}
-            </pre>
+            <p class="whitespace-pre-wrap font-sans">
+                {{ packageItem.info }} 
+            </p>
             <div class="flex space-x-1">
-                <img v-for="packageItem in service.packages" :key="packageItem.id" class="max-h-4"
+                <img class="max-h-4"
                     :src="`/assests/packages/${packageItem.code.toLowerCase()}.svg`" :alt="packageItem.code" />
             </div>
         </Container>
@@ -25,7 +25,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import Container from "@/Components/Container.vue";
 import {Head, Link, router, useForm} from "@inertiajs/vue3";
 
-const props = defineProps(['service']);
+const props = defineProps(['packageItem']);
 
 
 </script>

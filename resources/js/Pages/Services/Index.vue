@@ -1,7 +1,13 @@
 <template>
     <AppLayout>
         <Container>
-
+            <div v-if="$page.props.auth.user.is_admin">
+                <menu class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
+                    <li>
+                        <AddPackage />
+                    </li>
+                </menu>
+            </div>
             <PackagesList :packageItems="packageItems" />
 
             <div class="mx-auto max-w-7xl px-6 lg:px-8 py-6 my-6">
@@ -47,6 +53,7 @@ import { relativeDate } from "@/Utilities/date.js";
 import { defineProps } from "vue";
 import Card from "@/Components/Card.vue";
 import PackagesList from "@/Pages/Services/Partials/PackagesList.vue";
+import AddPackage from "@/Pages/Services/Partials/AddPackage.vue";
 import { Link } from "@inertiajs/vue3";
 
 defineProps(['services', 'packageItems']);
