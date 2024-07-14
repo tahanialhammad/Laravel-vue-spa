@@ -17,6 +17,10 @@ class PackageResource extends JsonResource
         return [
             'id' => $this->id,
             'code' => $this->code,
+            'info' => $this->info,
+            'routes' => [
+                'show' => $this->showRoute(),
+            ],
         ];
     }
 }
