@@ -20,7 +20,9 @@ class ServiceResource extends JsonResource
             'description' => $this->description,
             'updated_at' => $this->updated_at,
             'packages' => PackageResource::collection($this->whenLoaded('packages')),
-
+            'routes' => [
+                'show' => $this->showRoute(),
+            ],
         ];
     }
 }
