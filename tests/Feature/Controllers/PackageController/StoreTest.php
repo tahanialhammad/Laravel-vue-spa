@@ -15,6 +15,7 @@ beforeEach(function () {
 it('requires authentication', function () {
     post(route('packages.store'))->assertRedirect(route('login'));
 });
+
 it('stores a package', function () {
     $user = User::factory()->create();
     $data = value($this->validData);

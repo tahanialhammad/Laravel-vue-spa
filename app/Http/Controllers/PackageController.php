@@ -35,15 +35,11 @@ class PackageController extends Controller
     {
         $data = $request->validate([
             'code' => ['required', 'string', 'min:3', 'max:50'],
-            'info' => ['required', 'string', 'min:10', 'max:10000'],
+            'info' => ['required', 'string', 'min:5', 'max:10000'],
         ]);
 
-        $package = Package::create([
-            ...$data,
-        ]);
+        $package = Package::create($data);
 
-        //   return to_route('packages.show', $package);
-        //use slug 
         return redirect($package->showRoute());
     }
 
