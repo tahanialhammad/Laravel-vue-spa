@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateServiceRequest;
 use App\Http\Resources\PackageResource;
 use App\Http\Resources\ServiceResource;
 use App\Models\Package;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -16,10 +18,10 @@ class ServiceController extends Controller
      */
     public function index()
     {
-   //     $services = ServiceResource::collection(Service::latest()->latest('id')->paginate());
-   $services = ServiceResource::collection(Service::with('packages')->latest()->paginate());
+        //     $services = ServiceResource::collection(Service::latest()->latest('id')->paginate());
+        $services = ServiceResource::collection(Service::with('packages')->latest()->paginate());
 
-        return inertia('Services/Index', [           
+        return inertia('Services/Index', [
             'services' => $services,
             'packageItems' => PackageResource::collection(Package::all()),
         ]);
@@ -44,11 +46,16 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
+    public function show(Request $request, Service $service)
     {
-       $service->load('packages');
+        if (!Str::endsWith($service->showRoute(), $request->path())) {
 
-        return inertia('Services/Show',[
+            return redirect($service->showRoute($request->query()), status: 301); //301 permanent redirect to correct route
+        }
+
+        $service->load('packages');
+
+        return inertia('Services/Show', [
             'service' => ServiceResource::make($service),
         ]);
     }

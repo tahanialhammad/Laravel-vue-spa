@@ -7,9 +7,12 @@
             <div class="mx-auto max-w-7xl px-6 lg:px-8 py-6 my-6">
                 <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
-                    <Card v-for="service in services.data" :key="service.id">
+                    <Card v-for="service in services.data" :key="service.id" class="group ">
                         <template #cardHeader>
-                            {{ service.title }}
+                            <!-- <Link :href="route('services.show', service.id)" class="block group px-2 py-4"> -->
+                            <Link :href="service.routes.show" class="block group px-2 py-4">
+                            <span class="font-bold text-lg group-hover:text-indigo-500">{{ service.title }}</span>
+                            </Link>
                         </template>
                         <template #cardBody>
                             <p>
@@ -44,6 +47,7 @@ import { relativeDate } from "@/Utilities/date.js";
 import { defineProps } from "vue";
 import Card from "@/Components/Card.vue";
 import PackagesList from "@/Pages/Services/Partials/PackagesList.vue";
+import { Link } from "@inertiajs/vue3";
 
 defineProps(['services', 'packageItems']);
 const formattedDate = (service) => relativeDate(service.updated_at);
