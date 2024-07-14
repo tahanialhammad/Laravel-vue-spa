@@ -200,7 +200,8 @@
             </li>
             <slot name="toolbar" :editor="editor" />
         </menu>
-        <EditorContent :editor="editor" />
+        <!-- <EditorContent :editor="editor" /> -->
+        <EditorContent :editor="editor" :class="contentClass" />
     </div>
 </template>
 
@@ -213,9 +214,23 @@ import { Markdown } from "tiptap-markdown";
 import "remixicon/fonts/remixicon.css";
 import { Placeholder } from "@tiptap/extension-placeholder";
 
+// const props = defineProps({
+//     editorClass: "",
+//     placeholder: null,
+// });
 const props = defineProps({
-    editorClass: "",
-    placeholder: null,
+    editorClass: {
+        type: String,
+        default: "",
+    },
+    placeholder: {
+        type: String,
+        default: null,
+    },
+    contentClass: {
+        type: String,
+        default: "",
+    },
 });
 
 const model = defineModel(); // is like a ref

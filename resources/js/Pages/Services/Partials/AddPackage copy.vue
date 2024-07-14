@@ -65,15 +65,13 @@ const form = useForm({
     info: "",
 });
 
+//const createPackage = () => form.package(route('packages.store'));
+
 const createPackage = () => {
     form.post(route('packages.store'), {
-        onFinish: (response) => {
-            if (Object.keys(form.errors).length === 0) {
-                closeModal();
-            }
-        },
+        onFinish: () => closeModal(),
         onError: () => {
-            openModal()
+            // handle error if needed
         },
     });
 };
