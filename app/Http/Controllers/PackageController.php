@@ -6,6 +6,7 @@ use App\Http\Resources\PackageResource;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class PackageController extends Controller
 {
@@ -33,6 +34,7 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Package::class);
         $data = $request->validate([
             'code' => ['required', 'string', 'min:3', 'max:50'],
             'info' => ['required', 'string', 'min:5', 'max:10000'],
