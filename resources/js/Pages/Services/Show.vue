@@ -12,6 +12,10 @@
             <pre class="whitespace-pre-wrap font-sans">
                 {{ service.description }}
             </pre>
+
+            <article class="mt-6 prose prose-sm max-w-none" v-html="service.description">
+            </article>
+
             <div class="flex space-x-1">
                 <img v-for="packageItem in service.packages" :key="packageItem.id" class="max-h-4"
                     :src="`/assests/packages/${packageItem.code.toLowerCase()}.svg`" :alt="packageItem.code" />
