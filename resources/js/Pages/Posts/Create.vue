@@ -37,7 +37,7 @@
                     </MarkdownEditor>
 
 
-                    <TextArea id="body" v-model="form.body" rows="5" />
+                    <!-- <TextArea id="body" v-model="form.body" rows="5" /> -->
                     <InputError :message="form.errors.body" class="mt-1" />
                 </div>
 

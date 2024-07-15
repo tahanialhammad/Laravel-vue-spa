@@ -200,8 +200,7 @@
             </li>
             <slot name="toolbar" :editor="editor" />
         </menu>
-        <!-- <EditorContent :editor="editor" /> -->
-        <EditorContent :editor="editor" :class="contentClass" />
+        <EditorContent :editor="editor" />
     </div>
 </template>
 
@@ -226,10 +225,6 @@ const props = defineProps({
     placeholder: {
         type: String,
         default: null,
-    },
-    contentClass: {
-        type: String,
-        default: "",
     },
 });
 

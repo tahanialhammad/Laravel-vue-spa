@@ -1,8 +1,8 @@
 <template>
     <AppLayout>
         <Container>
-            <div v-if="$page.props.auth.user.is_admin">
-                <menu class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
+            <div v-if="$page.props.auth.user">
+                <menu v-if="$page.props.auth.user.is_admin" class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
                     <li>
                         <AddPackage />
                     </li>

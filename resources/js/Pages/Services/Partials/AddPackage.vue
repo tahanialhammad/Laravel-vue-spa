@@ -2,12 +2,12 @@
     <div>
         <PrimaryButton @click="openModal">Add Package</PrimaryButton>
 
-        <Modal :show="showModal" @close="closeModal" maxWidth="lg" closeable>
+        <Modal :show="showModal" @close="closeModal" maxWidth="xl" closeable>
             <template #default>
                 <div class="p-6">
                     <h2 class="text-lg font-medium text-gray-900">Modal Title</h2>
 
-                   <form @submit.prevent="createPackage" class="mt-6">
+                    <form @submit.prevent="createPackage" class="mt-6">
                         <div>
                             <InputLabel for="code" class="sr-only">Code</InputLabel>
                             <TextInput id="code" class="w-full" v-model="form.code"
@@ -17,17 +17,16 @@
 
                         <div class="mt-3">
                             <InputLabel for="info" class="sr-only">Info</InputLabel>
-                            <MarkdownEditor v-model="form.info" content-class="h-20tt" />
+                            <MarkdownEditor v-model="form.info" editor-class="h-20tt min-h-[150px]" />
                             <InputError :message="form.errors.info" class="mt-1" />
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 flex space-x-2 justify-end	">
+                            <SecondaryButton @click="closeModal">Close</SecondaryButton>
                             <PrimaryButton type="submit">Create package</PrimaryButton>
                         </div>
                     </form>
 
-                    <button @click="closeModal"
-                        class="mt-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Close</button>
                 </div>
             </template>
         </Modal>
@@ -45,6 +44,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import TextArea from "@/Components/TextArea.vue";
 import MarkdownEditor from "@/Components/MarkdownEditor.vue";
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 
 
