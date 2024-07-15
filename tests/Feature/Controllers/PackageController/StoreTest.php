@@ -17,7 +17,9 @@ it('requires authentication', function () {
 });
 
 it('stores a package', function () {
-    $user = User::factory()->create();
+   // $user = User::factory()->create();
+    $user = User::factory()->create(['is_admin' => true]);
+
     $data = value($this->validData);
 
     actingAs($user)->post(route('packages.store'), $data);
