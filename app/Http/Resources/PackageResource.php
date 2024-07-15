@@ -18,6 +18,7 @@ class PackageResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'info' => $this->info,
+            'updated_at' => $this->updated_at,
             'routes' => [
                 'show' => $this->showRoute(),
             ],

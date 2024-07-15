@@ -39,7 +39,7 @@
 
                 </div>
             </div>
-            <Pagination v-if="services.meta" :meta="services.meta" class="mt-2" @pagination-change="fetchServices" />
+            <Pagination v-if="services.meta" :meta="services.meta" class="mt-2" />
         </Container>
     </AppLayout>
 </template>

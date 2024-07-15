@@ -15,9 +15,11 @@ class PackageController extends Controller
      */
     public function index()
     {
-       // $packageItems = PackageResource::collection(Package::latest()->paginate());
+       $packageItems = PackageResource::collection(Package::latest()->paginate());
         return inertia('Packages/Index', [
-            'packageItems' => PackageResource::collection(Package::all()),
+            // 'packageItems' => PackageResource::collection(Package::all()),
+            'packageItems' =>  $packageItems,
+
         ]);
     }
 
