@@ -16,9 +16,20 @@
                     <Card v-for="service in services.data" :key="service.id" class="group ">
                         <template #cardHeader>
                             <!-- <Link :href="route('services.show', service.id)" class="block group px-2 py-4"> -->
-                            <Link :href="service.routes.show" class="block group px-2 py-4">
-                            <span class="font-bold text-lg group-hover:text-indigo-500">{{ service.title }}</span>
-                            </Link>
+                            <div class="flex justify-between items-center w-full">
+                                <Link :href="service.routes.show" class="block group px-2 py-4">
+                                <span class="font-bold text-lg group-hover:text-indigo-500">{{ service.title }}</span>
+                                </Link>
+
+                                <div>
+
+                                    <PencilSquareIcon class="size-4 inline-block mr-1" />
+                                    <EyeIcon class="size-4 inline-block mr-1" />
+                                    <TrashIcon class="size-4 inline-block mr-1" />
+
+                                </div>
+                            </div>
+
                         </template>
                         <template #cardBody>
                             <p>
@@ -55,6 +66,9 @@ import Card from "@/Components/Card.vue";
 import PackagesList from "@/Pages/Services/Partials/PackagesList.vue";
 import AddPackage from "@/Pages/Services/Partials/AddPackage.vue";
 import { Link } from "@inertiajs/vue3";
+import { PencilSquareIcon, EyeIcon, TrashIcon } from '@heroicons/vue/20/solid'
+
+
 
 defineProps(['services', 'packageItems']);
 const formattedDate = (service) => relativeDate(service.updated_at);
