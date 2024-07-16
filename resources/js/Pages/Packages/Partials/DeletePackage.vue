@@ -1,9 +1,5 @@
 <template>
-    <div class="flex items-center">
-        <!-- <Link :href="packageItem.routes.show">
-        <PencilSquareIcon class="size-4 inline-block mr-1" />
-        </Link> -->
-
+    <div v-if="packageItem.can?.delete" class="flex items-center">
         <form @submit.prevent="deleteItem">
             <button>
                 <TrashIcon class="size-4 inline-block mr-1" />
@@ -16,11 +12,13 @@
 
 <script setup>
 import { Head, Link, router, useForm } from "@inertiajs/vue3";
-import { PencilSquareIcon, EyeIcon, TrashIcon } from '@heroicons/vue/20/solid'
+import { TrashIcon } from '@heroicons/vue/20/solid'
 
 
 const props = defineProps(['packageItem']);
 
-const deleteItem = () => router.delete(route('packages.destroy', props.packageItem));
+const deleteItem = () => router.delete(route('packages.destroy', props.packageItem),{
+    preserveScroll: true,
+});
 
 </script>
