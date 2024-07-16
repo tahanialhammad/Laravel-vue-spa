@@ -38,7 +38,7 @@
                                 Last upade at :
                                 {{ formattedDate(packageItem) }}
 
-                                <div class="flex items-center">
+                                <div v-if="packageItem.can?.delete"  class="flex items-center">
                                     <DeletePackage :packageItem="packageItem.id" />
                                     <EditPackage :packageItem="packageItem.id" />
                                 </div>
