@@ -38,7 +38,10 @@
                                 Last upade at :
                                 {{ formattedDate(packageItem) }}
 
-                                <DeletePackage :packageItem="packageItem.id" />
+                                <div class="flex items-center">
+                                    <DeletePackage :packageItem="packageItem.id" />
+                                    <EditPackage :packageItem="packageItem.id" />
+                                </div>
                             </div>
                         </template>
                     </Accordion>
@@ -61,6 +64,8 @@ import { Link, router } from "@inertiajs/vue3";
 import Card from "@/Components/Card.vue";
 import { relativeDate } from "@/Utilities/date.js";
 import DeletePackage from "./Partials/DeletePackage.vue";
+import EditPackage from "./Partials/EditPackage.vue";
+
 import Accordion from "@/Components/Accordion.vue";
 import AddPackage from "../Services/Partials/AddPackage.vue";
 

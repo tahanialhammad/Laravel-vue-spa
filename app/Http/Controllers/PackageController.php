@@ -15,7 +15,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-       $packageItems = PackageResource::collection(Package::latest()->paginate());
+        $packageItems = PackageResource::collection(Package::latest()->paginate());
         return inertia('Packages/Index', [
             // 'packageItems' => PackageResource::collection(Package::all()),
             'packageItems' =>  $packageItems,
@@ -82,18 +82,10 @@ class PackageController extends Controller
      */
     public function destroy(Request $request, Package $package)
     {
-        // if ($request->user()->id !== $comment->user_id) {
-        //     abort(403);
-        // }
-        // // use policy
-        // Gate::authorize('delete', $comment);
+        Gate::authorize('delete', $package);
 
         $package->delete();
-    
-        // return redirect($comment->post->showRoute(['page' => $request->query('page')]))
-        //     ->banner('Comment deleted.');
-
         return redirect(route('packages.index'))
-        ->banner('Package deleted.');
+            ->banner('Package deleted.');
     }
 }

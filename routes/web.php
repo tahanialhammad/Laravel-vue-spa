@@ -43,8 +43,8 @@ Route::middleware([
  //   Route::get('admindashboard', [AdminController::class, 'dashboard'])->name('admindashboard');
 
  //Services and packages
-    Route::resource('packages', PackageController::class)->only(['store', 'update', ]);
-    Route::delete('packages/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
+    Route::resource('packages', PackageController::class)->only(['store', 'update', 'destroy' ]);
+    // Route::delete('packages/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
 
 });
 
