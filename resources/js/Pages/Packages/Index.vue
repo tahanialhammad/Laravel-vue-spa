@@ -1,8 +1,8 @@
 <template>
     <AppLayout>
         <Container>
-            <div class="mx-auto max-w-7xl px-6 lg:px-8">
-                <div class="flex mx-auto mt-10 items-center gap-8">
+            <div class="mx-auto max-w-7xl px-6 lg:px-8 flex justify-between items-center">
+                <div class="flex items-center gap-8">
                     <div v-for="packageItem in packageItems.data" :key="packageItem.id"
                         class="border-2 border-indigo-600 rounded-md p-2">
                         <Link :href="packageItem.routes.show" class="capitalize font-bold">
@@ -10,6 +10,11 @@
                             :src="`/assests/packages/${packageItem.code.toLowerCase()}.svg`" :alt="packageItem.code"
                             width="50" height="50" />
                         </Link>
+                    </div>
+                </div>
+                <div v-if="$page.props.auth.user">
+                    <div v-if="$page.props.auth.user.is_admin">
+                        <AddPackage />
                     </div>
                 </div>
             </div>
@@ -57,6 +62,7 @@ import Card from "@/Components/Card.vue";
 import { relativeDate } from "@/Utilities/date.js";
 import DeletePackage from "./Partials/DeletePackage.vue";
 import Accordion from "@/Components/Accordion.vue";
+import AddPackage from "../Services/Partials/AddPackage.vue";
 
 defineProps(['packageItems']);
 const formattedDate = (packageItem) => relativeDate(packageItem.updated_at);
