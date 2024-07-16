@@ -17,7 +17,7 @@
 
                         <div class="mt-3">
                             <InputLabel for="info" class="sr-only">Info</InputLabel>
-                            <MarkdownEditor v-model="form.info" editor-class="min-h-[120px]" />
+                            <MarkdownEditor v-model="form.info" editor-class="!min-h-[120px]" />
                             <InputError :message="form.errors.info" class="mt-1" />
                         </div>
 

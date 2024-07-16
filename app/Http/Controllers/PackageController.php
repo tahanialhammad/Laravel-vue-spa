@@ -80,8 +80,20 @@ class PackageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, Package $package)
     {
-        //
+        // if ($request->user()->id !== $comment->user_id) {
+        //     abort(403);
+        // }
+        // // use policy
+        // Gate::authorize('delete', $comment);
+
+        $package->delete();
+    
+        // return redirect($comment->post->showRoute(['page' => $request->query('page')]))
+        //     ->banner('Comment deleted.');
+
+        return redirect(route('packages.index'))
+        ->banner('Package deleted.');
     }
 }
