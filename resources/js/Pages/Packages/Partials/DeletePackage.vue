@@ -1,5 +1,5 @@
 <template>
-    <div v-if="packageItem.can?.delete" class="flex items-center">
+    <div class="flex items-center">
         <form @submit.prevent="deleteItem">
             <button>
                 <TrashIcon class="size-4 inline-block mr-1" />
