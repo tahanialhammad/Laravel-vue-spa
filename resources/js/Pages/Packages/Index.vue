@@ -14,21 +14,31 @@
                 </div>
             </div>
 
-
             <div class="max-w-screen-xl mx-auto px-5 bg-white min-h-screen">
                 <div class="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
-                    <Accordion v-for="packageItem in packageItems.data" :key="packageItem.id" >
+                    <Accordion v-for="packageItem in packageItems.data" :key="packageItem.id">
                         <template #accordionHeader>
-                            {{ packageItem.code }}
+                            <div class="flex items-center">
+                                <img class="max-h-12 object-containt me-1"
+                                    :src="`/assests/packages/${packageItem.code.toLowerCase()}.svg`"
+                                    :alt="packageItem.code" width="50" height="50" />
+                                {{ packageItem.code }}
+                            </div>
+
                         </template>
                         <template #accordionBody>
                             {{ packageItem.info }}
+
+                            <div class="flex justify-between">
+                                Last upade at :
+                                {{ formattedDate(packageItem) }}
+
+                                <DeletePackage :packageItem="packageItem.id" />
+                            </div>
                         </template>
                     </Accordion>
                 </div>
             </div>
-
-
 
             <Pagination v-if="packageItems.meta" :meta="packageItems.meta" class="mt-2" />
 
