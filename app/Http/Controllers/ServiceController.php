@@ -10,6 +10,7 @@ use App\Http\Resources\ServiceResource;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class ServiceController extends Controller
 {
@@ -38,9 +39,19 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreServiceRequest $request)
+    public function store(Request $request, Service $service)
     {
-        //
+        Gate::authorize('create', Service::class);
+        $data = $request->validate([
+            'title' => ['required', 'string', 'min:3', 'max:50'],
+            'description' => ['required', 'string', 'min:5', 'max:10000'],
+        ]);
+
+        $service = Service::create($data);
+
+        // return redirect($service->showRoute());
+        return redirect(route('services.index'))
+            ->banner('Service created.');
     }
 
     /**

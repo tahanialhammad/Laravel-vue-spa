@@ -15,6 +15,6 @@ class Package extends Model
     }
     public function showRoute(array $parameters = [])
     {
-        return route('packages.show', [$this, Str::slug($this->title), ...$parameters]);
+        return route('packages.show', [$this, Str::slug($this->code), ...$parameters]);
     }
 }

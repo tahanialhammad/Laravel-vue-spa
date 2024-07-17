@@ -16,10 +16,8 @@ it('requires authentication', function () {
     post(route('packages.store'))->assertRedirect(route('login'));
 });
 
-it('stores a package', function () {
-   // $user = User::factory()->create();
+it('store a package', function () {
     $user = User::factory()->create(['is_admin' => true]);
-
     $data = value($this->validData);
 
     actingAs($user)->post(route('packages.store'), $data);
@@ -27,4 +25,12 @@ it('stores a package', function () {
     $this->assertDatabaseHas(Package::class, [
         ...$data,
     ]);
+});
+
+it('redirects to the packages index page', function () {
+    $user = User::factory()->create(['is_admin' => true]);
+    $data = value($this->validData);
+
+    actingAs($user)->post(route('packages.store', $data))
+        ->assertRedirect(route('packages.index'));
 });

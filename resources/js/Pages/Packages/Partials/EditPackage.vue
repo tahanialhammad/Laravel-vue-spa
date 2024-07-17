@@ -69,7 +69,7 @@ const form = useForm({
 });
 
 const editPackage = () => {
-    form.post(route('packages.update'), {
+form.post(route('packages.update'), {
         onFinish: (response) => {
             if (Object.keys(form.errors).length === 0) {
                 closeModal();
