@@ -10,6 +10,22 @@
             </div>
             <PackagesList :packageItems="packageItems" />
 
+            <div>
+                <form v-if="$page.props.auth.user" @submit.prevent="addServiceForm" class="mt-4">
+                        <div>
+                            <InputLabel for="title">Package name</InputLabel>
+                            <TextInput id="title" v-model="serviceForm.title" class="w-full"
+                                placeholder="Give package name code" />
+                        </div>
+                        <div>
+                            <InputLabel for="description">Package info</InputLabel>
+                            <TextArea id="description" v-model="serviceForm.description" />
+                        </div>
+                        <PrimaryButton type="submit" :disabled="serviceForm.processing" class="mt-3">Add New Service</PrimaryButton>
+                    </form>
+            </div>
+
+
             <div class="mx-auto max-w-7xl px-6 lg:px-8 py-6 my-6">
                 <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
@@ -67,10 +83,25 @@ import PackagesList from "@/Pages/Services/Partials/PackagesList.vue";
 import AddPackage from "@/Pages/Services/Partials/AddPackage.vue";
 import { Link } from "@inertiajs/vue3";
 import { PencilSquareIcon, EyeIcon, TrashIcon } from '@heroicons/vue/20/solid'
+import { useForm } from "@inertiajs/vue3";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import TextArea from "@/Components/TextArea.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 
 
 defineProps(['services', 'packageItems']);
 const formattedDate = (service) => relativeDate(service.updated_at);
+
+
+const serviceForm = useForm({
+    title: '',
+    description: ''
+});
+
+const addServiceForm = () => serviceForm.post(route('services.store'),{
+    onSuccess: () => serviceForm.reset(),
+});
 
 </script>

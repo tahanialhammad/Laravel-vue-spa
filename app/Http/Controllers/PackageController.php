@@ -44,7 +44,9 @@ class PackageController extends Controller
 
         $package = Package::create($data);
 
-        return redirect($package->showRoute());
+        // return redirect($package->showRoute());
+        return redirect(route('packages.index'))
+            ->banner('Package created.');
     }
 
     /**
@@ -72,9 +74,18 @@ class PackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Package $package)
     {
-        //
+        Gate::authorize('update', $package);
+
+        $data = $request->validate([
+            'code' => ['required', 'string', 'min:3', 'max:50'],
+            'info' => ['required', 'string', 'min:5', 'max:10000'],
+        ]);
+
+        $package->update($data);
+        return redirect($package->showRoute())
+            ->banner('Package updated.');
     }
 
     /**
