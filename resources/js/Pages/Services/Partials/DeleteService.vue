@@ -16,22 +16,18 @@ import { TrashIcon } from '@heroicons/vue/20/solid'
 import { useConfirm } from "@/Utilities/Composables/useConfirm.js";
 
 
-const props = defineProps(['packageItem']);
+const props = defineProps(['serviceItem']);
 const { confirmation } = useConfirm();
 
-// const deleteItem = () => router.delete(route('packages.destroy', props.packageItem),{
-//     preserveScroll: true,
-// });
 
-
-const deleteItem = async (packageItem) => {
+const deleteItem = async (serviceItem) => {
     if (
-        !(await confirmation("Are you sure you want to delete this package?"))
+        !(await confirmation("Are you sure you want to delete this service?"))
     ) {
         return;
     }
 
-    router.delete(route('packages.destroy', props.packageItem), {
+    router.delete(route('services.destroy', props.serviceItem), {
         preserveScroll: true,
     });
 };

@@ -58,6 +58,11 @@ const menu = [
         url: route('services.index'),
         route: 'services.index',
     },
+    {
+        name: "Packages",
+        url: route('packages.index'),
+        route: 'packages.index',
+    },
 ];
 </script>
 
