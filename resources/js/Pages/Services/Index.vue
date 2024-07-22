@@ -41,7 +41,7 @@
 
                                     <PencilSquareIcon class="size-4 inline-block mr-1" />
                                     <EyeIcon class="size-4 inline-block mr-1" />
-                                    <TrashIcon class="size-4 inline-block mr-1" />
+                                    <DeleteService :serviceItem="service.id" />
 
                                 </div>
                             </div>
@@ -88,6 +88,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DeleteService from "./Partials/DeleteService.vue";
 
 
 

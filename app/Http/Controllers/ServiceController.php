@@ -92,6 +92,10 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        Gate::authorize('delete', $service);
+
+        $service->delete();
+        return redirect(route('services.index'))
+            ->banner('Service deleted.');
     }
 }
