@@ -18,8 +18,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="flex ">
+            <div class="flex">
                 <div class="w-2/3">
                     <div class="max-w-screen-xl mx-auto px-5 bg-white min-h-screen">
                         <div class="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
@@ -31,18 +30,15 @@
                                             :alt="packageItem.code" width="50" height="50" />
                                         {{ packageItem.code }}
                                     </div>
-
                                 </template>
                                 <template #accordionBody>
                                     {{ packageItem.info }}
-
                                     <div class="flex justify-between">
-                                        Last upade at :
-                                        {{ formattedDate(packageItem) }}
-
+                                        Last updated at: {{ formattedDate(packageItem) }}
                                         <div v-if="packageItem.can?.delete" class="flex items-center">
                                             <DeletePackage :packageItem="packageItem.id" />
-                                            <EditPackage :packageItem="packageItem.id" />
+                                            <!-- all packageItem data -->
+                                            <EditPackage :packageItem="packageItem" />
                                         </div>
                                     </div>
                                 </template>
@@ -61,21 +57,15 @@
                             <InputLabel for="info">Package info</InputLabel>
                             <TextArea id="info" v-model="packageForm.info" />
                         </div>
-                        <PrimaryButton type="submit" :disabled="packageForm.processing" class="mt-3">Add New Package</PrimaryButton>
+                        <PrimaryButton type="submit" :disabled="packageForm.processing" class="mt-3">Add New Package
+                        </PrimaryButton>
                     </form>
                 </div>
             </div>
-
-
-
-
             <Pagination v-if="packageItems.meta" :meta="packageItems.meta" class="mt-2" />
-
         </Container>
     </AppLayout>
 </template>
-
-
 
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
@@ -87,7 +77,6 @@ import { relativeDate } from "@/Utilities/date.js";
 import DeletePackage from "./Partials/DeletePackage.vue";
 import EditPackage from "./Partials/EditPackage.vue";
 import { useForm } from "@inertiajs/vue3";
-
 import Accordion from "@/Components/Accordion.vue";
 import AddPackage from "../Services/Partials/AddPackage.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -103,10 +92,7 @@ const packageForm = useForm({
     info: ''
 });
 
-const addPackageForm = () => packageForm.post(route('packages.store'),{
+const addPackageForm = () => packageForm.post(route('packages.store'), {
     onSuccess: () => packageForm.reset(),
 });
-
-
-
 </script>
