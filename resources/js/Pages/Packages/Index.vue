@@ -4,7 +4,7 @@
             <div class="mx-auto max-w-7xl px-6 lg:px-8 flex justify-between items-center">
                 <div class="flex items-center gap-8">
                     <div v-for="packageItem in packageItems.data" :key="packageItem.id"
-                        class="border-2 border-indigo-600 rounded-md p-2 h-10 w-10">
+                        class="bg-slate-900 rounded-md p-2 h-10 w-10">
                         <Link :href="packageItem.routes.show" class="capitalize font-bold">
                         <img class="max-h-12 object-containt"
                             :src="`/assests/packages/${packageItem.code.toLowerCase()}.svg`" :alt="packageItem.code"
@@ -18,10 +18,11 @@
                     </div>
                 </div>
             </div>
+
             <div class="flex">
                 <div class="w-2/3">
-                    <div class="max-w-screen-xl mx-auto px-5 bg-white min-h-screen">
-                        <div class="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
+                    <div class="max-w-screen-xl mx-auto px-5 bg-slate-900 rounded min-h-screen">
+                        <div class="grid divide-y divide-slate-600 max-w-xl mx-auto mt-8">
                             <Accordion v-for="packageItem in packageItems.data" :key="packageItem.id">
                                 <template #accordionHeader>
                                     <div class="flex items-center">
@@ -46,15 +47,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-1/3 p-4 bg-gray-300">
+
+                <div class="w-1/3 p-6">
                     <form v-if="$page.props.auth.user" @submit.prevent="addPackageForm" class="mt-4">
                         <div>
-                            <InputLabel for="code">Package name</InputLabel>
+                            <InputLabel class="text-slate-300" for="code">Package name</InputLabel>
                             <TextInput id="code" v-model="packageForm.code" class="w-full"
                                 placeholder="Give package name code" />
                         </div>
                         <div>
-                            <InputLabel for="info">Package info</InputLabel>
+                            <InputLabel  class="text-slate-300" for="info">Package info</InputLabel>
                             <TextArea id="info" v-model="packageForm.info" />
                         </div>
                         <PrimaryButton type="submit" :disabled="packageForm.processing" class="mt-3">Add New Package

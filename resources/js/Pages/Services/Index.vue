@@ -1,28 +1,38 @@
 <template>
     <AppLayout>
         <Container>
-            <div v-if="$page.props.auth.user">
-                <menu v-if="$page.props.auth.user.is_admin" class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
-                    <li>
-                        <AddPackage />
-                    </li>
-                </menu>
+            <div>
+                <!-- Sub Menu -->
+                <nav class="w-1/2 mx-auto border-b border-slate-800">
+                    <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <template v-for="item in menu" :key="item.name">
+                            <NavLink class="pb-2" v-if="item.when ? item.when() : true" :href="item.url"
+                                :active="route().current(item.route)">
+                                {{ item.name }}
+                            </NavLink>
+                        </template>
+                        <div v-if="$page.props.auth.user">
+                            <AddPackage v-if="$page.props.auth.user.is_admin" />
+                        </div>
+                    </div>
+                </nav>
             </div>
             <PackagesList :packageItems="packageItems" />
 
             <div>
                 <form v-if="$page.props.auth.user" @submit.prevent="addServiceForm" class="mt-4">
-                        <div>
-                            <InputLabel for="title">Package name</InputLabel>
-                            <TextInput id="title" v-model="serviceForm.title" class="w-full"
-                                placeholder="Give package name code" />
-                        </div>
-                        <div>
-                            <InputLabel for="description">Package info</InputLabel>
-                            <TextArea id="description" v-model="serviceForm.description" />
-                        </div>
-                        <PrimaryButton type="submit" :disabled="serviceForm.processing" class="mt-3">Add New Service</PrimaryButton>
-                    </form>
+                    <div>
+                        <InputLabel for="title">Package name</InputLabel>
+                        <TextInput id="title" v-model="serviceForm.title" class="w-full"
+                            placeholder="Give package name code" />
+                    </div>
+                    <div>
+                        <InputLabel for="description">Package info</InputLabel>
+                        <TextArea id="description" v-model="serviceForm.description" />
+                    </div>
+                    <PrimaryButton type="submit" :disabled="serviceForm.processing" class="mt-3">Add New Service
+                    </PrimaryButton>
+                </form>
             </div>
 
 
@@ -89,6 +99,7 @@ import TextInput from "@/Components/TextInput.vue";
 import TextArea from "@/Components/TextArea.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DeleteService from "./Partials/DeleteService.vue";
+import NavLink from "@/Components/NavLink.vue";
 
 
 
@@ -101,8 +112,16 @@ const serviceForm = useForm({
     description: ''
 });
 
-const addServiceForm = () => serviceForm.post(route('services.store'),{
+const addServiceForm = () => serviceForm.post(route('services.store'), {
     onSuccess: () => serviceForm.reset(),
 });
 
+
+const menu = [
+    {
+        name: "All Packages",
+        url: route('packages.index'),
+        route: 'packages.index',
+    },
+]
 </script>

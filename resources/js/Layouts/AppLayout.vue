@@ -67,14 +67,14 @@ const menu = [
 </script>
 
 <template>
-    <div class="bg-slate-900">
+    <div class="bg-slate-950 text-slate-100">
 
         <Head :title="title" />
 
         <Banner />
 
         <div class="min-h-screen ">
-            <nav class="bg-slate-900 border-b border-slate-800">
+            <nav class="bg-slate-950 border-b border-slate-800">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
