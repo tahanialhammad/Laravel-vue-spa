@@ -26,7 +26,7 @@
       </div>
       <div
         v-show="isOpen"
-        class="text-neutral-600 mt-3 transition-all duration-300 ease-in-out"
+        class="text-neutral-300 mt-3 transition-all duration-300 ease-in-out"
       >
         <slot name="accordionBody" />
       </div>
