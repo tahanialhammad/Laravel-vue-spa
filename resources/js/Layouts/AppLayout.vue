@@ -67,14 +67,14 @@ const menu = [
 </script>
 
 <template>
-    <div>
+    <div class="bg-slate-900">
 
         <Head :title="title" />
 
         <Banner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen ">
+            <nav class="bg-slate-900 border-b border-slate-800">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -103,7 +103,7 @@ const menu = [
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <button v-if="$page.props.jetstream.managesProfilePhotos"
-                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-slate-300 transition">
                                             <img class="h-8 w-8 rounded-full object-cover"
                                                 :src="$page.props.auth.user.profile_photo_url"
                                                 :alt="$page.props.auth.user.name">
@@ -111,7 +111,7 @@ const menu = [
 
                                         <span v-else class="inline-flex rounded-md">
                                             <button type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-500 bg-white hover:text-slate-700 focus:outline-none focus:bg-slate-50 active:bg-slate-50 transition ease-in-out duration-150">
                                                 {{ $page.props.auth.user.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +126,7 @@ const menu = [
 
                                     <template #content>
                                         <!-- Account Management -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
+                                        <div class="block px-4 py-2 text-xs text-slate-400">
                                             Manage Account
                                         </div>
 
@@ -139,7 +139,7 @@ const menu = [
                                             API Tokens
                                         </DropdownLink>
 
-                                        <div class="border-t border-gray-200" />
+                                        <div class="border-t border-slate-200" />
 
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
@@ -167,7 +167,7 @@ const menu = [
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:bg-slate-100 focus:text-slate-500 transition duration-150 ease-in-out"
                                 @click="showingNavigationDropdown = !showingNavigationDropdown">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
@@ -194,7 +194,7 @@ const menu = [
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div v-if="$page.props.auth.user" class="pt-4 pb-1 border-t border-gray-200">
+                    <div v-if="$page.props.auth.user" class="pt-4 pb-1 border-t border-slate-200">
                         <div class="flex items-center px-4">
                             <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3">
                                 <img class="h-10 w-10 rounded-full object-cover"
@@ -202,10 +202,10 @@ const menu = [
                             </div>
 
                             <div>
-                                <div class="font-medium text-base text-gray-800">
+                                <div class="font-medium text-base text-slate-800">
                                     {{ $page.props.auth.user.name }}
                                 </div>
-                                <div class="font-medium text-sm text-gray-500">
+                                <div class="font-medium text-sm text-slate-500">
                                     {{ $page.props.auth.user.email }}
                                 </div>
                             </div>
@@ -230,9 +230,9 @@ const menu = [
 
                             <!-- Team Management -->
                             <template v-if="$page.props.jetstream.hasTeamFeatures">
-                                <div class="border-t border-gray-200" />
+                                <div class="border-t border-slate-200" />
 
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class="block px-4 py-2 text-xs text-slate-400">
                                     Manage Team
                                 </div>
 
@@ -249,9 +249,9 @@ const menu = [
 
                                 <!-- Team Switcher -->
                                 <template v-if="$page.props.auth.user.all_teams.length > 1">
-                                    <div class="border-t border-gray-200" />
+                                    <div class="border-t border-slate-200" />
 
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                    <div class="block px-4 py-2 text-xs text-slate-400">
                                         Switch Teams
                                     </div>
 
