@@ -1,60 +1,20 @@
 <template>
     <AppLayout title="Home">
-        <template #header>
-            <Hero :features="features">
-                <template #heroTitle>
-                    "Beheer, plan, klaar..."
-                                </template>
-                <template #heroTitle2>
-                    Welkom bij Evenatora – Jouw hub voor evenementen!
-                </template>
-                <template #heroDescription>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit
-                    eaque, iste dolor cupiditate blanditiis ratione.
-                </template>
-                <template #heroImage>
-                    <img src="assests/hero.jpg"
-                        alt="Product screenshot"
-                        class="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
-                        width="2432" height="1442" />
-                </template>
-            </Hero>
-        </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
-                </div>
+        <div class="relative isolate px-6 pt-14 lg:px-8">
+            <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                aria-hidden="true">
+                <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                    style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" />
             </div>
+            <HeroSection />
+
         </div>
     </AppLayout>
 </template>
 
-
-
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
-import Hero from '@/Components/Hero.vue';
-import { CloudArrowUpIcon, TicketIcon, CurrencyEuroIcon } from '@heroicons/vue/20/solid'
+import HeroSection from './Partials/HeroSection.vue';
 
-const features = [
-    {
-        name: 'Eenvoudig Evenementbeheer',
-        description:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-        icon: CloudArrowUpIcon,
-    },
-    {
-        name: 'Snelle Registratie en Digitale Tickets',
-        description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-        icon: TicketIcon,
-    },
-    {
-        name: 'Realtime Statistieken en Betalingsbeheer',
-        description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-        icon: CurrencyEuroIcon,
-    },
-]
 </script>
