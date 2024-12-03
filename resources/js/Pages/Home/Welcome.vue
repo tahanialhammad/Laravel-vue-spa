@@ -10,6 +10,8 @@
                         
             <HeroSection />
 
+         <Portfolio />
+
         </div>
     </AppLayout>
 </template>
@@ -17,5 +19,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import HeroSection from './Partials/HeroSection.vue';
+import Portfolio from './Partials/Portfolio.vue';
 
 </script>
