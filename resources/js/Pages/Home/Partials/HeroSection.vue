@@ -3,11 +3,11 @@
         <!-- Left Section -->
         <div class="w-1/2 flex flex-col gap-8 p-4 relative">
             <!-- Small Circle SVG -->
-<Circle class="absolute top-5 right-5 z-0" />
+            <Circle class="absolute top-5 right-5 z-0" />
 
             <!-- Gradient Circle SVG -->
 
-<GradientCircle class="absolute -top-8 -left-2 z-0" />
+            <GradientCircle class="absolute -top-8 -left-2 z-0" />
 
             <!-- Text Content -->
             <h1 class="text-5xl font-black w-2/3 z-10">Award Winning Digital Design Agency</h1>
@@ -15,7 +15,7 @@
                 An award-winning digital design agency specializing in creative solutions, innovative branding, and
                 cutting-edge web design to elevate your business.
                 <!-- Small Circle SVG -->
-                <Circle  class="absolute right-1/2 z-0" circleClass="fill-orange-500" />
+                <Circle class="absolute right-1/2 z-0" circleClass="fill-orange-500" />
 
             </h3>
 
@@ -29,9 +29,7 @@
         <!-- Right Section with Image -->
         <div class="relative">
 
-                    <Square  class="absolute top-5 right-5 z-0" />
-
-
+            <Square class="absolute top-5 right-5 z-0" />
 
             <img src="https://demo.phlox.pro/agency-aestry/wp-content/uploads/sites/279/2021/05/Hero-Image.png"
                 alt="Hero Image">
