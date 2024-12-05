@@ -29,10 +29,5 @@ import PortfolioSlider from './PortfolioSlider.vue';
             </div>
 
         </div>
-
-        <div class="w-full h-40 bg-cover bg-center"
-            style="background-image: url('https://demo.phlox.pro/agency-aestry/wp-content/uploads/sites/279/2021/06/Post-Image-714x714.jpg');">
-            fff
-        </div>
     </div>
 </template>
