@@ -15,6 +15,8 @@
                 <Features />
 
                 <Services />
+
+                <Team />
             </div>
         </Container>
     </AppLayout>
@@ -26,5 +28,6 @@ import HeroSection from './Partials/HeroSection.vue';
 import Portfolio from './Partials/Portfolio.vue';
 import Features from './Partials/Features.vue';
 import Services from './Partials/Services.vue';
+import Team from './Partials/Team.vue';
 
 </script>
