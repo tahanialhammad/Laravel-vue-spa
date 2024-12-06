@@ -17,6 +17,10 @@
                 <Services />
 
                 <Team />
+                
+                <AboutUs />
+
+                <Blog :posts="posts" />
             </div>
         </Container>
     </AppLayout>
@@ -29,5 +33,9 @@ import Portfolio from './Partials/Portfolio.vue';
 import Features from './Partials/Features.vue';
 import Services from './Partials/Services.vue';
 import Team from './Partials/Team.vue';
+import AboutUs from './Partials/AboutUs.vue';
+import Blog from './Partials/Blog.vue';
+
+defineProps(["posts"]);
 
 </script>
