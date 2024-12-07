@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteController;
@@ -115,3 +116,8 @@ Route::get('services/{service}/{slug}', [ServiceController::class, 'show'])->nam
 Route::get('packages/', [PackageController::class, 'index'])->name('packages.index');
 Route::get('packages/{package}/{slug?}', [PackageController::class, 'show'])->name('packages.show'); 
 
+
+   //portfolio
+   Route::resource('portfolio', PortfolioController::class);
+
+   Route::post('/portfolio/upload', [PortfolioController::class, 'store'])->name('portfolio.upload');
