@@ -2,7 +2,7 @@
     <div class="flex">
         <div class="flex-1">
             <div class="relative flex flex-col gap-8 items-start">
-                <h3 class="text-orange-500 my-8">About Us</h3>
+                <h3 class="text-rose-500 my-8">About Us</h3>
                 <div class="relative mb-8">
                     <h1 class="relative font-black text-4xl z-10">
                         We Are Who Will Grow Your Business

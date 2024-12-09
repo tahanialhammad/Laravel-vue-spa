@@ -1,6 +1,6 @@
 <template>
     <div class="relative m-8 flex flex-col gap-4 items-center">
-        <h3 class="text-orange-500">Portfolio</h3>
+        <h3 class="text-rose-500">Portfolio</h3>
         <div class="relative">
             <h1 class="relative font-black text-4xl z-10">
                 Our Recent Works
