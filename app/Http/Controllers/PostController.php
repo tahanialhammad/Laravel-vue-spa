@@ -51,8 +51,8 @@ class PostController extends Controller
             )
             ->latest()
             ->latest('id')
-            ->paginate()
-            ->withQueryString(); // when using search pagination must stil work with all serach results
+            ->paginate();
+         //   ->withQueryString(); // when using search pagination must stil work with all serach results
 
         return inertia('Posts/Index', [
             'posts' => PostResource::collection($posts),
