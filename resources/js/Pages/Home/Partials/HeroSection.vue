@@ -15,12 +15,12 @@
                 An award-winning digital design agency specializing in creative solutions, innovative branding, and
                 cutting-edge web design to elevate your business.
                 <!-- Small Circle SVG -->
-                <Circle class="absolute right-1/2 z-0" circleClass="fill-orange-500" />
+                <Circle class="absolute right-1/2 z-0" circleClass="fill-rose-500" />
 
             </h3>
 
             <Link
-                class="w-40 px-4 py-2 text-white font-bold text-center rounded-full bg-gradient-to-r from-emerald-500 to-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-emerald-500 transition duration-300"
+                class="w-40 px-4 py-2 text-white font-bold text-center rounded-full bg-gradient-to-r from-emerald-500 to-rose-500 hover:bg-gradient-to-r hover:from-rose-500 hover:to-emerald-500 transition duration-300"
                 :href="route('services.index')">
             Contact us
             </Link>

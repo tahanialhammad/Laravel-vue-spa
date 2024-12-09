@@ -3,7 +3,7 @@
         <div class="grid grid-cols-3 gap-4 w-full">
             <div class="relative flex flex-col gap-4 items-start">
                 <Square class="absolute -top-5 left-5 z-0" />
-                <h3 class="text-orange-500 my-8">Our Team</h3>
+                <h3 class="text-rose-500 my-8">Our Team</h3>
                 <div class="relative mb-8">
                     <h1 class="relative font-black text-4xl z-10">
                         Best Team Ever
@@ -28,7 +28,7 @@
                         {{ item.job }}
                     </p>
                     <div class="flex flex-row gap-2 mt-2">
-                        <a :href="item.facebookUrl" class="hover:text-orange-500">
+                        <a :href="item.facebookUrl" class="hover:text-rose-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
                                 class="w-6 h-6">
                                 <path
@@ -37,14 +37,14 @@
 
 
                         </a>
-                        <a :href="item.linkedInUrl" class="hover:text-orange-500">
+                        <a :href="item.linkedInUrl" class="hover:text-rose-500">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"
                                 class="w-6 h-6">
                                 <path
                                     d="M100.28 448H7.4V148.9h92.88zm-46.44-338.6C24.33 109.4 0 85.07 0 54.84A54.68 54.68 0 0154.41 0c29.86 0 54.55 24.22 54.55 54.84 0 30.23-24.69 54.56-54.55 54.56zM447.83 448h-92.68V302.4c0-34.7-.7-79.25-48.29-79.25-48.3 0-55.7 37.7-55.7 76.65V448h-92.68V148.9h89V184h1.27c12.4-23.45 42.62-48.3 87.7-48.3 93.7 0 111 61.7 111 141.8V448z" />
                             </svg>
                         </a>
-                        <a :href="item.instagramUrl" class="hover:text-orange-500">
+                        <a :href="item.instagramUrl" class="hover:text-rose-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
                                 class="w-6 h-6">
                                 <path
@@ -56,7 +56,7 @@
             </div>
             <div class="flex items-center justify-center">
                 <Link
-                    class="w-40 px-4 py-2 text-orange-500 font-bold text-center rounded-full border-2 hover:text-white border-orange-500 hover:bg-gradient-to-r hover:from-orange-500 hover:to-emerald-500 transition duration-300"
+                    class="w-40 px-4 py-2 text-rose-500 font-bold text-center rounded-full border-2 hover:text-white border-rose-500 hover:bg-gradient-to-r hover:from-rose-500 hover:to-emerald-500 transition duration-300"
                     :href="route('services.index')">
                 Contact us
                 </Link>

@@ -16,8 +16,8 @@
                     <li>
                         <!-- to seve search by topic -->
                         <Pill :href="route('posts.index', { query: searchForm.query })" :filled="!selectedTopic">All
-                            Posts</Pill>
-
+                            Posts
+                        </Pill>
                     </li>
                     <li v-for="topic in topics" :key="topic.id">
                         <!-- to seve search by topic -->
@@ -30,9 +30,38 @@
 
             </div>
 
+            <!-- <Card cardType="vertical">
+                <template #cardHeader>
+                    <h6
+                    class="block mb-4 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase">
+                    startups
+                </h6>
+                <h4 class="block mb-2 font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                    Lyft launching cross-platform service this week
+                </h4>
+                </template>
+                <template #cardBody>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illo omnis laboriosam nobis culpa mollitia voluptatibus veniam eos tenetur ut adipisci magnam, id dolorum pariatur repudiandae, sint ullam. Quod, distinctio.</p>
+                </template>
+                <template #cardFooter>
+                    <a href="#" class="inline-block">
+                    <button
+                        class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none hover:bg-gray-900/10 active:bg-gray-900/20"
+                        type="button">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg>
+                    </button>
+                </a>
+                    </template>
+            </Card> -->
 
-            <PostsCardsGrid :posts="posts.data" :formattedDate="formattedDate" />
 
+            <!-- <PostsCardsGrid :posts="posts.data" :formattedDate="formattedDate" /> -->
+
+            <PostsList class="w-1/2" :posts="posts.data" :formattedDate="formattedDate" />
             <Pagination :meta="posts.meta" :only="['posts']" class="mt-2" />
         </Container>
     </AppLayout>
@@ -47,6 +76,8 @@ import PageHeading from "@/Components/PageHeading.vue";
 import Pill from "@/Components/Pill.vue";
 import PostsCardsGrid from "@/Components/PostsCardsGrid.vue";
 import SearchForm from "./Partials/SearchForm.vue";
+import Card from "@/Components/Card.vue";
+import PostsList from "./Partials/PostsList.vue";
 
 //from controller, to detect what is in query
 const props = defineProps(["posts", "topics", "selectedTopic", "query"]);

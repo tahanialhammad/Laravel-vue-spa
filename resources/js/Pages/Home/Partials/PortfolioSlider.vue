@@ -12,7 +12,7 @@
   class="relative group bg-cover bg-center flex justify-start items-end h-60 rounded-3xl"
 >
   <!-- Hidden background that appears on hover -->
-  <div class="absolute inset-0 bg-gradient-to-t from-orange-600 via-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-rose-600 via-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
   <!-- Slide content -->
   <h3 class="font-bold text-xl m-4 relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{{ item.name }}</h3>

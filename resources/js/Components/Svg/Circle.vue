@@ -2,7 +2,7 @@
 defineProps({
   circleClass: {
     type: String,
-    default: "fill-none stroke-orange-500 stroke-2",
+    default: "fill-none stroke-rose-500 stroke-2",
   },
 });
 </script>
