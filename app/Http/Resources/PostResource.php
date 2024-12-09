@@ -37,6 +37,7 @@ class PostResource extends JsonResource
             // 'likes_count' => $this->likes_count,
             'likes_count' => Number::abbreviate($this->likes_count),
 
+            'image' => $this->image,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
             // for slug url 

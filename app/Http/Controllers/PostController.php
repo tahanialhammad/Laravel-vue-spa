@@ -42,12 +42,12 @@ class PostController extends Controller
     public function index(Request $request, Topic $topic = null)
     {
         $posts = Post::with(['user', 'topic'])
-            ->when($topic, fn (Builder $query) => $query->whereBelongsTo($topic))
+            ->when($topic, fn(Builder $query) => $query->whereBelongsTo($topic))
             // where(...) + orwhere(...) === whereAny([...],...)
 
             ->when(
                 $request->query('query'),
-                fn (Builder $query) => $query->whereAny(['title', 'body'], 'like', '%' . $request->query('query') . '%')
+                fn(Builder $query) => $query->whereAny(['title', 'body'], 'like', '%' . $request->query('query') . '%')
             )
             ->latest()
             ->latest('id')
@@ -56,8 +56,8 @@ class PostController extends Controller
 
         return inertia('Posts/Index', [
             'posts' => PostResource::collection($posts),
-            'topics' => fn () => TopicResource::collection(Topic::all()),
-            'selectedTopic' => fn () => $topic ? TopicResource::make($topic) : null,
+            'topics' => fn() => TopicResource::collection(Topic::all()),
+            'selectedTopic' => fn() => $topic ? TopicResource::make($topic) : null,
             'query' => $request->query('query'),
         ]);
     }
@@ -68,7 +68,7 @@ class PostController extends Controller
     {
         Gate::authorize('create', Post::class);
         return inertia('Posts/Create', [
-            'topics' => fn () => TopicResource::collection(Topic::all()),
+            'topics' => fn() => TopicResource::collection(Topic::all()),
         ]);
     }
 
@@ -80,20 +80,28 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => ['required', 'string', 'min:10', 'max:120'],
-            'topic_id' => ['required', 'exists:topics,id'],
-            'body' => ['required', 'string', 'min:100', 'max:10000'],
+        $data =  $request->validate([
+            'title' => 'required|string|max:255',
+            'topic_id' => 'required|exists:topics,id',
+            'body' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        }
 
         $post = Post::create([
             ...$data,
+            'image' => $imagePath,
             'user_id' => $request->user()->id,
         ]);
 
-        //  return to_route('posts.show', $post);
-        //use slug 
-        return redirect($post->showRoute());
+        // return to_route('posts.show', $post);
+        // use slug 
+
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
 
 
@@ -115,14 +123,14 @@ class PostController extends Controller
 
             // 'post' => PostResource::make($post), // fn () => It is faster because it is only executed when we need to pass to the front end.
             // 'post' => fn () => PostResource::make($post),
-            'post' => fn () => PostResource::make($post)->withLikePermission(),
+            'post' => fn() => PostResource::make($post)->withLikePermission(),
             //       'comments' => fn () => CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10)),
             //becouse this is not a resouce that can use withLikePermission method directly , it is a collection , sp we tansferr coltion to resoce then use method  
 
-            'post' => fn () => PostResource::make($post)->withLikePermission(),
+            'post' => fn() => PostResource::make($post)->withLikePermission(),
             'comments' => function () use ($post) {
                 $commentResource = CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10));
-                $commentResource->collection->transform(fn ($resource) => $resource->withLikePermission());
+                $commentResource->collection->transform(fn($resource) => $resource->withLikePermission());
 
                 return $commentResource;
             },

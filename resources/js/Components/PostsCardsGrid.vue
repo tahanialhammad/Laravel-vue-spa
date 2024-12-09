@@ -3,7 +3,7 @@
 
     <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
       <article v-for="post in posts" :key="post.id"
-        class="flex max-w-xl flex-col items-start justify-between border-2 p-4 rounded-lg bg-white">
+        class="flex max-w-xl flex-col items-start justify-between border-2 p-4 rounded-lg bg-white text-black">
 
 
         <div class="flex justify-between text-xs w-full">
@@ -38,8 +38,16 @@
               {{ post.user.is_admin ? "Admin" : "User" }} role
             </p>
           </div>
+        <!-- Post Image need style  -->
+  <div class="">
+    <img :src="post.image" class="object-cover w-full h-full" />
+
+    <div class="text-red-300"> hhhhh {{ post.image }}</div>
+  
+  </div>
         </div>
 
+        
       </article>
     </div>
 
