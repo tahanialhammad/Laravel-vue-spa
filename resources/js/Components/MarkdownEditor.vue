@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="editor"
-        class="rounded-md border-0 bg-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+        class="rounded-md border-0 text-black bg-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
     >
         <menu class="flex divide-x border-b">
             <li>

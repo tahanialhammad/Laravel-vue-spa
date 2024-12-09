@@ -12,7 +12,7 @@
 
                 <div class="mt-3">
                     <InputLabel for="topic_id">Select a Topic</InputLabel>
-                    <select v-model="form.topic_id" id="topic_id" class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <select v-model="form.topic_id" id="topic_id" class="mt-1 w-full rounded-md text-black border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         <option v-for="topic in topics" :key="topic.id" :value="topic.id">
                             {{ topic.name }}
                         </option>
@@ -35,6 +35,18 @@
                         </template>
 
                     </MarkdownEditor>
+
+                    <div class="mt-3">
+    <InputLabel for="image">Upload Image</InputLabel>
+    <input
+        type="file"
+        id="image"
+        @change="handleFileUpload"
+        class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+    />
+    <InputError :message="form.errors.image" class="mt-1" />
+</div>
+
 
 
                     <!-- <TextArea id="body" v-model="form.body" rows="5" /> -->
@@ -64,10 +76,17 @@ import PageHeading from "@/Components/PageHeading.vue";
 
 const props = defineProps(['topics']);
 
+const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    form.image = file;
+};
+
+
 const form = useForm({
     title: "",
     topic_id: props.topics[0].id,
     body: "",
+    image: null,
 });
 
 const createPost = () => form.post(route('posts.store'));
