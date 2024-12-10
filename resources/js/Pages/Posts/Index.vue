@@ -2,7 +2,7 @@
     <AppLayout>
         <Container>
             <div>
-                <div class="flex justify-center items-center">
+                <div class="flex justify-center items-center mb-8">
                     <div
                         class="w-1/2 bg-gradient-to-r from-emerald-500 to-rose-500 rounded-3xl flex flex-col gap-4 p-10 items-start -me-11 z-10">
                         <h1 class="font-black text-4xl">
