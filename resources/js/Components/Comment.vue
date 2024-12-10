@@ -8,18 +8,18 @@
             <!-- delete ago becouse its now from date.js -->
 
             <span class="block pt-1 text-xs text-gray-600 first-letter:uppercase">By {{ comment.user.name }}
-                {{ relativeDate(comment.created_at) }} | <span class="text-pink-500">{{ comment.likes_count }}
+                {{ relativeDate(comment.created_at) }} | <span class="text-rose-500">{{ comment.likes_count }}
                     likes</span>
             </span>
             <div class="mt-2 flex justify-end space-x-3 empty:hidden">
                 <div v-if="$page.props.auth.user">
                     <Link v-if="comment.can.like" preserve-scroll :href="route('likes.store', ['comment', comment.id])"
-                        method="post" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
+                        method="post" class="inline-block text-gray-700 hover:text-rose-500 transition-colors">
                     <HandThumbUpIcon class="size-4 inline-block mr-1" />
                     <span class="sr-only">Like Comment</span>
                     </Link>
                     <Link v-else preserve-scroll :href="route('likes.destroy', ['comment', comment.id])" method="delete"
-                        class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
+                        class="inline-block text-gray-700 hover:text-rose-500 transition-colors">
                     <HandThumbDownIcon class="size-4 inline-block mr-1" />
                     <span class="sr-only">Unlike Comment</span>
                     </Link>

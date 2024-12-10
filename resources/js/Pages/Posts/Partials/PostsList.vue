@@ -26,7 +26,7 @@
           </div>
         </div>
         <Link :href="post.routes.show" class="group block px-2 py-4">
-          <span class="text-lg font-bold group-hover:text-indigo-500">
+          <span class="text-lg font-bold group-hover:text-rose-500">
             {{ post.title }}
           </span>
           <span class="block pt-1 text-sm text-slate-500">

@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="editor"
-        class="rounded-md border-0 text-black bg-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+        class="rounded-md border-0 text-black bg-white shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-rose-600"
     >
         <menu class="flex divide-x border-b">
             <li>
@@ -11,7 +11,7 @@
                     class="rounded-tl-md px-3 py-2"
                     :class="[
                         editor.isActive('bold')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Bold"
@@ -26,7 +26,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('italic')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Italic"
@@ -41,7 +41,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('strike')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Strikethrough"
@@ -58,7 +58,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('blockquote')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Blockquote"
@@ -75,7 +75,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('bulletList')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Bullet list"
@@ -92,7 +92,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('orderedList')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Numeric list"
@@ -109,7 +109,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('orderedList')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Numeric list"
@@ -124,7 +124,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('link')
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Add link"
@@ -146,7 +146,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('heading', { level: 2 })
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Heading 1"
@@ -168,7 +168,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('heading', { level: 3 })
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Heading 2"
@@ -190,7 +190,7 @@
                     class="px-3 py-2"
                     :class="[
                         editor.isActive('heading', { level: 4 })
-                            ? 'bg-indigo-500 text-white'
+                            ? 'bg-rose-500 text-white'
                             : 'hover:bg-gray-200',
                     ]"
                     title="Heading 3"

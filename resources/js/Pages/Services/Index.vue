@@ -44,7 +44,7 @@
                             <!-- <Link :href="route('services.show', service.id)" class="block group px-2 py-4"> -->
                             <div class="flex justify-between items-center w-full">
                                 <Link :href="service.routes.show" class="block group px-2 py-4">
-                                <span class="font-bold text-lg group-hover:text-indigo-500">{{ service.title }}</span>
+                                <span class="font-bold text-lg group-hover:text-rose-500">{{ service.title }}</span>
                                 </Link>
 
                                 <div>

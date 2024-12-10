@@ -158,12 +158,12 @@ const menu = [
 
                             <template v-else>
                                 <Link :href="route('login')"
-                                    class="rounded-full px-6 py-2 me-2 text-white/70 ring-1 ring-indigo-700 transition hover:text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                    class="rounded-full px-6 py-2 me-2 text-white/70 ring-1 ring-rose-700 transition hover:text-white hover:bg-rose-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Log in
                                 </Link>
 
                                 <Link :href="route('register')"
-                                class="rounded-full px-6 py-2 text-white/70 transition hover:text-white hover:bg-indigo-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                class="rounded-full px-6 py-2 text-white/70 transition hover:text-white hover:bg-rose-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Register
                                 </Link>
                             </template>
