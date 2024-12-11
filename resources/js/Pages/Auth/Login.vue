@@ -7,8 +7,6 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import AuthLink from "@/Components/AuthLink.vue";
-import Marketing from "./Partials/Marketing.vue";
 
 defineProps({
     canResetPassword: Boolean,
@@ -35,14 +33,6 @@ const submit = () => {
 <template>
 
     <Head title="Log in" />
-
-    <!-- <div class="flex">
-
-        <div class="w-1/2 flex items-center justify-end h-screen">
-            <Marketing />
-        </div>
-
-        <div class="w-1/2"> -->
     <AuthenticationCard canResetPassword="canResetPassword">
         <template #logo>
             <AuthenticationCardLogo />
@@ -86,7 +76,5 @@ const submit = () => {
             </div>
         </form>
     </AuthenticationCard>
-    <!-- </div>
-    </div> -->
 
 </template>
