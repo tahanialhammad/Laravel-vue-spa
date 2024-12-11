@@ -25,7 +25,7 @@
                     {{ selectedTopic.description }}
                 </p>
 
-                <menu class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
+                <menu class="flex space-x-4 my-8 overflow-x-auto py-1">
                     <li>
                         <!-- to seve search by topic -->
                         <Pill :href="route('posts.index', { query: searchForm.query })" :filled="!selectedTopic">All
