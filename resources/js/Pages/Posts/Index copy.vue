@@ -56,7 +56,7 @@
                         class="group block px-2 py-4"
                     >
                         <span
-                            class="text-lg font-bold group-hover:text-indigo-500"
+                            class="text-lg font-bold group-hover:text-rose-500"
                             >{{ post.title }}</span
                         >
                         <span

@@ -4,7 +4,7 @@
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="flex mx-auto mt-10 items-center gap-8">
           <div v-for="packageItem in packageItems.data" :key="packageItem.id"
-              class="border-2 border-indigo-600 rounded-md p-2">
+              class="border-2 border-rose-600 rounded-md p-2">
             <Link :href="packageItem.routes.show" class="capitalize font-bold">
               <img class="max-h-12 object-containt"
                   :src="`/assests/packages/${packageItem.code.toLowerCase()}.svg`" :alt="packageItem.code"

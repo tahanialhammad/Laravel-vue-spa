@@ -1,6 +1,6 @@
 <template>
 
-  <section class="flex max-w-xl flex-col items-start justify-between border-2 p-4 rounded-lg bg-white text-slate-700 hover:border-indigo-600">
+  <section class="flex max-w-xl flex-col items-start justify-between border-2 p-4 rounded-lg bg-white text-slate-700 hover:border-rose-600">
     <div class="flex justify-between font-bold w-full">
       <slot name="cardHeader" />
     </div>

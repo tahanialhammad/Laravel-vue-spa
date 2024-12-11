@@ -14,14 +14,16 @@
             </Pill>
           </div>
 
-          <div class="text-pink-500 font-bold">{{ post.likes_count }}
+          <div class="text-rose
+          
+          -500 font-bold">{{ post.likes_count }}
             <HeartIcon class="size-4 inline-block" />
           </div>
 
         </div>
 
         <Link :href="post.routes.show" class="group block px-2 py-4">
-        <span class="text-lg font-bold group-hover:text-indigo-500">{{ post.title }}</span>
+        <span class="text-lg font-bold group-hover:text-rose-500">{{ post.title }}</span>
         <span class="block pt-1 text-sm text-gray-600 first-letter:uppercase">{{ formattedDate(post) }} by
           {{ post.user.name }}</span>
         </Link>
