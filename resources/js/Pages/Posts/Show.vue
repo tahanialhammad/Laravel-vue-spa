@@ -7,8 +7,15 @@
 
     <AppLayout :title="post.title">
         <Container>
-            <img :src="post.image" :alt="post.title" class="w-full rounded-lg shadow-md" />
-            
+            <!-- <img :src="post.image" :alt="post.title" class="w-full rounded-lg shadow-md" /> -->
+
+            <img v-if="post.image"
+            :src="post.image ? `/${post.image}` : ''"
+            :alt="post.title"
+            class="w-full max-h-80 object-cover rounded-3xl shadow-md mb-8"
+            />
+
+
             <Pill :href="route('posts.index', { topic: post.topic.slug })">{{ post.topic.name }}</Pill>
 
             <!-- <h1 class="text-2xl font-bold">{{ post.title }}</h1> -->
