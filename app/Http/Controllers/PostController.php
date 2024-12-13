@@ -54,8 +54,13 @@ class PostController extends Controller
             ->paginate();
          //   ->withQueryString(); // when using search pagination must stil work with all serach results
 
-        return inertia('Posts/Index', [
+         $recentPosts = Post::latest()
+         ->take(2)
+         ->get();
+
+         return inertia('Posts/Index', [
             'posts' => PostResource::collection($posts),
+            'recentPosts' => PostResource::collection($recentPosts),
             'topics' => fn() => TopicResource::collection(Topic::all()),
             'selectedTopic' => fn() => $topic ? TopicResource::make($topic) : null,
             'query' => $request->query('query'),
