@@ -4,7 +4,9 @@
   <h1 class="font-black text-4xl">Recent Posts</h1>
 
   <Card v-for="recentPost in recentPosts" :key="recentPost.id"
-    :imageUrl="recentPost.image ? recentPost.image : 'https://via.placeholder.com/300x200'" :altText="recentPost.title"
+    :imageUrl="recentPost.image ? `/${recentPost.image}` : 'https://via.placeholder.com/300x200'" 
+
+    :altText="recentPost.title"
     cardType="vertical">
     <template #cardHeader>
       <Link :href="recentPost.routes.show" class="group block px-2 py-4">

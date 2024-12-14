@@ -79,8 +79,7 @@
                     <Pagination :meta="posts.meta" :only="['posts']" class="mt-2" />
                 </div>
                 <div class="w-1/4 ms-8 flex flex-col gap-5">
-                    <SideBaar  :recentPosts="recentPosts" />
-
+                    <SideBaar :recentPosts="recentPosts" />
                 </div>
             </div>
 
