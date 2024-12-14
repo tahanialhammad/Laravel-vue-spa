@@ -94,9 +94,7 @@ import { Link, useForm, usePage } from "@inertiajs/vue3";
 import { relativeDate } from "@/Utilities/date.js";
 import PageHeading from "@/Components/PageHeading.vue";
 import Pill from "@/Components/Pill.vue";
-import PostsCardsGrid from "@/Components/PostsCardsGrid.vue";
 import SearchForm from "./Partials/SearchForm.vue";
-import Card from "@/Components/Card.vue";
 import PostsList from "./Partials/PostsList.vue";
 import SideBaar from "./Partials/SideBaar.vue";
 

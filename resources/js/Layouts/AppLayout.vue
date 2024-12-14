@@ -8,6 +8,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import ConfirmationModalWrapper from "@/Components/ConfirmationModalWrapper.vue";
+import FooterSection from '@/Components/FooterSection.vue';
 
 
 defineProps({
@@ -163,7 +164,7 @@ const menu = [
                                 </Link>
 
                                 <Link :href="route('register')"
-                                class="rounded-full px-6 py-2 text-white/70 transition hover:text-white hover:bg-rose-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                    class="rounded-full px-6 py-2 text-white/70 transition hover:text-white hover:bg-rose-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Register
                                 </Link>
                             </template>
@@ -296,5 +297,8 @@ const menu = [
             </main>
         </div>
         <ConfirmationModalWrapper />
+
+        <FooterSection />
+
     </div>
 </template>
