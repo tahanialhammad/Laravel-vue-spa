@@ -18,7 +18,7 @@ const props = defineProps({
 
 const containerClasses = computed(() => {
   return props.cardType === 'horizontal'
-    ? 'flex max-w-4xl bg-slate-900 text-slate-100 shadow-md rounded-lg overflow-hidden'
+    ? 'flex max-w-4xl max-h-96 bg-slate-900 text-slate-100 shadow-md rounded-lg overflow-hidden'
     : 'flex flex-col max-w-sm bg-slate-900 text-slate-100 shadow-md rounded-lg overflow-hidden';
 });
 

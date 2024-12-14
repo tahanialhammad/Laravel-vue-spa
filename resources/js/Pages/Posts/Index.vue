@@ -9,7 +9,7 @@
                             Crisis is making online education economy go mainstream
                         </h1>
                         <p>September 12, 2021</p>
-                         <p class="text-black">   BY Roy Hipper</p>
+                        <p class="text-black"> BY Roy Hipper</p>
                     </div>
                     <img class="w-1/2 rounded-3xl"
                         src="https://demo.phlox.pro/agency-aestry/wp-content/uploads/sites/279/2021/05/Featured-Image-1970x1044.jpg"
@@ -73,9 +73,16 @@
 
 
             <!-- <PostsCardsGrid :posts="posts.data" :formattedDate="formattedDate" /> -->
+            <div class="flex">
+                <div class="w-3/4">
+                    <PostsList class="" :posts="posts.data" :formattedDate="formattedDate" />
+                    <Pagination :meta="posts.meta" :only="['posts']" class="mt-2" />
+                </div>
+                <div class="w-1/4 ms-8 flex flex-col gap-5">
+                    <SideBaar :recentPosts="recentPosts" />
+                </div>
+            </div>
 
-            <PostsList class="w-1/2" :posts="posts.data" :formattedDate="formattedDate" />
-            <Pagination :meta="posts.meta" :only="['posts']" class="mt-2" />
         </Container>
     </AppLayout>
 </template>
@@ -91,9 +98,10 @@ import PostsCardsGrid from "@/Components/PostsCardsGrid.vue";
 import SearchForm from "./Partials/SearchForm.vue";
 import Card from "@/Components/Card.vue";
 import PostsList from "./Partials/PostsList.vue";
+import SideBaar from "./Partials/SideBaar.vue";
 
 //from controller, to detect what is in query
-const props = defineProps(["posts", "topics", "selectedTopic", "query"]);
+const props = defineProps(["posts", "topics", "selectedTopic", "query", "recentPosts"]);
 
 const formattedDate = (post) => relativeDate(post.created_at);
 

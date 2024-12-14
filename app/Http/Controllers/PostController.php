@@ -52,10 +52,15 @@ class PostController extends Controller
             ->latest()
             ->latest('id')
             ->paginate();
-         //   ->withQueryString(); // when using search pagination must stil work with all serach results
+        //   ->withQueryString(); // when using search pagination must stil work with all serach results
+
+        $recentPosts = Post::latest()
+            ->take(2)
+            ->get();
 
         return inertia('Posts/Index', [
             'posts' => PostResource::collection($posts),
+            'recentPosts' => PostResource::collection($recentPosts),
             'topics' => fn() => TopicResource::collection(Topic::all()),
             'selectedTopic' => fn() => $topic ? TopicResource::make($topic) : null,
             'query' => $request->query('query'),
@@ -119,6 +124,10 @@ class PostController extends Controller
 
         $post->load('user', 'topic');
 
+        $recentPosts = Post::latest()
+            ->take(2)
+            ->get();
+
         return inertia('Posts/Show', [
 
             // 'post' => PostResource::make($post), // fn () => It is faster because it is only executed when we need to pass to the front end.
@@ -128,6 +137,7 @@ class PostController extends Controller
             //becouse this is not a resouce that can use withLikePermission method directly , it is a collection , sp we tansferr coltion to resoce then use method  
 
             'post' => fn() => PostResource::make($post)->withLikePermission(),
+            'recentPosts' => PostResource::collection($recentPosts),
             'comments' => function () use ($post) {
                 $commentResource = CommentResource::collection($post->comments()->with('user')->latest()->latest('id')->paginate(10));
                 $commentResource->collection->transform(fn($resource) => $resource->withLikePermission());
