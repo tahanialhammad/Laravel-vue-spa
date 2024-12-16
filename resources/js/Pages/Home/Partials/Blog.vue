@@ -8,18 +8,27 @@
             <GradientCircle class="absolute -top-8 -left-10 z-0" />
         </div>
 
-        <div class="grid grid-cols-3 gap-4 w-full">    
-            <article v-for="post in posts" :key="post.id"
-                class="rounded-3xl flex flex-col gap-4 items-start"
-                >
-                <img src="https://demo.phlox.pro/agency-aestry/wp-content/uploads/sites/279/2021/05/Featured-Image-957x650.jpg" alt="">
-            <h3 class="text-2xl">  {{ post.title }}</h3>
-            </article>
+        <div class="grid grid-cols-3 gap-4 w-full">
+
+
+            <Card v-for="post in posts" :key="post.id"
+                :imageUrl="post.image ? `/${post.image}` : 'https://via.placeholder.com/300x200'" :altText="post.title"
+                cardType="vertical">
+                <template #cardHeader>
+                    <Link :href="post.routes.show" class="group block px-2 py-4">
+                    <span class="text-lg font-bold group-hover:text-rose-400">
+                        {{ post.title }}
+                    </span>
+                    </Link>
+                </template>
+            </Card>
+
         </div>
 
     </div>
 </template>
 <script setup>
+import Card from '@/Components/Card.vue';
 import GradientCircle from '@/Components/Svg/GradientCircle.vue';
 defineProps(["posts"]);
 
