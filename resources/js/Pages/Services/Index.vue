@@ -1,6 +1,10 @@
 <template>
     <AppLayout>
         <Container>
+
+            <AboutService />
+<ServicesList :services="services.data" />
+
             <div>
                 <!-- Sub Menu -->
                 <nav class="w-1/2 mx-auto border-b border-slate-800">
@@ -100,6 +104,8 @@ import TextArea from "@/Components/TextArea.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DeleteService from "./Partials/DeleteService.vue";
 import NavLink from "@/Components/NavLink.vue";
+import ServicesList from "./Partials/ServicesList.vue";
+import AboutService from "./Partials/AboutService.vue";
 
 
 
