@@ -63,7 +63,12 @@ Admins with elevated privileges can manage the entire system. Key features inclu
 ---
 
 ## Project Screenshot
-(https://i.postimg.cc/XvX2DsGM/laravel-vue-spa.png)
+<img src="https://i.postimg.cc/XvX2DsGM/laravel-vue-spa.png"  alt="home page ">
+
+---
+
+### Author
+Developed by **Tahani Alhammad**.
 
 ---
 
@@ -123,11 +128,3 @@ Follow these steps to install and set up the project on your local environment:
 This project is open-source and available under the **MIT License**.
 
 ---
-
-## Contribution
-Feel free to contribute to this project. If you encounter issues or have suggestions for improvement, please open a pull request or create an issue.
-
----
-
-### Author
-Developed by **[Tahani Alhammad]**.
